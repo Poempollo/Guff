@@ -1,0 +1,1 @@
+Toda la gestión de navegación entre pantallas, React Navigation.

@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text>Bienvenido a Guff</Text>
+      <Button title="Pulsame" onPress={() => alert("Guff")}/>
       <StatusBar style="auto" />
     </View>
   );

@@ -1,0 +1,4 @@
+Funciones auxiliares o constantes.
+Constantes importantes, React necesita "redibujar" toda la aplicación cada vez que hay algún cambio en alguna variable
+o algún componente, esto afecta mucho al rendimiento. Constantes no son redibujadas, por tanto optimizamos la app.
+Importante entender esto bien.
