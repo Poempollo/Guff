@@ -1,7 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { useFonts } from 'expo-font';
 import { Montserrat_500Medium, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../App';
 import LoginForm from './LoginForm';
 import styles from './LoginStyles';
 
@@ -13,9 +16,7 @@ const LoginScreen = () => {
     Montserrat_700Bold,
   });
 
-  if (!fontsLoaded) {
-    return null; // O algún componente de carga
-  }
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   /**
    * 
@@ -25,14 +26,22 @@ const LoginScreen = () => {
    */
   const handleLogin = useCallback(() => {
     console.log('Credenciales: ', email, password);
-  }, [email, password]);
+
+    if (email && password) {
+      navigation.navigate('Home');
+    }
+  }, [email, password, navigation]);
+
+  if (!fontsLoaded) {
+    return null; // O algún componente de carga
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Text style={styles.logo}>🐾</Text>
-        <Text style={styles.title}>PetCare Pro</Text>
-        <Text style={styles.subtitle}>Tu compañero veterinario de confianza</Text>
+        <Text style={styles.title}>Guff</Text>
+        <Text style={styles.subtitle}>Para nuestros mejores amigos peludos</Text>
       </View>
 
       <LoginForm 
