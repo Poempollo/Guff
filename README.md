@@ -41,7 +41,7 @@ Guff/
 
 ## 🚧 Estado del proyecto
 
-🟡 *En desarrollo* — Actualmente en fase inicial (v0.0.1), estamos creando la arquitectura básica y una demo para probar componentes.
+🟡 *En desarrollo* — Actualmente en fase inicial (v0.0.2), estamos creando la arquitectura básica y una demo para probar componentes.
 
 ## 🧑‍💻 Colaboradores
 
