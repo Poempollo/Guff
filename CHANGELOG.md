@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.0.3.1] - 2025-04-23 - Javier
+## Added
+- Añadida la carpeta "styles/" que incluye los estilos propios de las vistas, y theme.ts.
+- theme.ts añade estilos generales para la aplicación como color de background o primario.
+
 ## [v0.0.3] - 2025-04-23 - Javier
 ## Added
 - Añadida la dependencia React Navigation para el manejo de la navegación: npx expo install @react-navigation/native @react-navigation native-stack react-native-screens react-native-safe-area-context react-native-gesture-handler.

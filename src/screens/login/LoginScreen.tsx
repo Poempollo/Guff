@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../App';
 import LoginForm from './LoginForm';
-import styles from './LoginStyles';
+import styles from '../../styles/LoginStyles';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');

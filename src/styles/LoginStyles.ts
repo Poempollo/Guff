@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "./theme";
 
 export default StyleSheet.create({
     container: {
@@ -6,7 +7,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        backgroundColor: '#f4f4f4',
+        backgroundColor: colors.background,
     },
     logoContainer: {
         alignItems: 'center',
@@ -14,28 +15,28 @@ export default StyleSheet.create({
     },
     logo: {
         fontSize: 60,
-        color: '#00bfff',
+        color: colors.primary,
     },
     title: {
         fontSize: 24,
         fontFamily: 'Montserrat_700Bold',
         marginBottom: 5,
-        color: '#333',
+        color: colors.primary,
     },
     subtitle: {
         fontSize: 16,
         fontFamily: 'Montserrat_500Medium',
-        color: '#777',
+        color: colors.subtitle,
     },
     button: {
-        backgroundColor: '#00bfff',
+        backgroundColor: colors.primary,
         padding: 15,
         borderRadius: 10,
         width: '100%',
         alignItems: 'center',
     },
     buttonText: {
-        color: 'white',
+        color: colors.white,
         fontSize: 18,
         fontFamily: 'Montserrat_700Bold',
     },
@@ -44,7 +45,7 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     footerLink: {
-        color: '#00bfff',
+        color: colors.primary,
         marginTop: 10,
         fontSize: 14,
     },
@@ -53,17 +54,17 @@ export default StyleSheet.create({
         marginBottom: 20,
     },
     input: {
-        backgroundColor: 'white',
+        backgroundColor: colors.white,
         padding: 15,
         borderRadius: 10,
         marginBottom: 10,
         fontSize: 16,
-        color: '#333',
+        color: colors.text,
         borderWidth: 1,
-        borderColor: '#ddd',
+        borderColor: colors.primary,
     },
     errorText: {
-        color: 'red',
+        color: colors.error,
         fontSize: 12,
         marginTop: -5,
         marginBottom: 10,

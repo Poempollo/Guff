@@ -1,6 +1,6 @@
 import React from "react";
 import { View, TextInput, Text, StyleSheet } from 'react-native';
-import styles from './LoginStyles';
+import styles from '../../styles/LoginStyles';
 
 type Props = {
     email: string;
