@@ -51,12 +51,12 @@ const LoginScreen = () => {
         onPasswordChange={setPassword}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+      <TouchableOpacity style={styles.button} onPress={(handleLogin)}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
 
       <View style={styles.footerContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
           <Text style={styles.footerLink}>¿No tienes cuenta? Regístrate</Text>
         </TouchableOpacity>
         <TouchableOpacity>

@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.0.3.2] - 2025-04-23 - Javier
+## Added
+- Añadida la vista de Registro, SignUpScreen.tsx, siguiendo la misma estructura que el Login.
+- Añadidad el componente de formulario de registro, para mejorar rendimiento.
+
 ## [v0.0.3.1] - 2025-04-23 - Javier
 ## Added
 - Añadida la carpeta "styles/" que incluye los estilos propios de las vistas, y theme.ts.
