@@ -1,5 +1,11 @@
 # Changelog
 
+
+
+## [v0.0.3.4] - 2025-04-24 - Raul
+## Added
+- Añadido vista de contraseña olvidada, ForgotPasswordScreen, siguiendo la misma estructura que los dos Logins.
+- Añadido también el componente reutilizable FogotPasswordForm que muestra formulario para recuperar contraseña.
 ## [v0.0.3.3] - 2025-04-24 - Javier
 ## Added
 - Añadido un archivo GITHUB.md como pequeña guía para el uso de GIT y GITHUB con comandos útiles, flujo de trabajo y recomendaciones.
