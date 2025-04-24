@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.0.3.3] - 2025-04-24 - Javier
+## Added
+- Añadido un archivo GITHUB.md como pequeña guía para el uso de GIT y GITHUB con comandos útiles, flujo de trabajo y recomendaciones.
+
 ## [v0.0.3.2] - 2025-04-23 - Javier
 ## Added
 - Añadida la vista de Registro, SignUpScreen.tsx, siguiendo la misma estructura que el Login.
