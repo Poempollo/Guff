@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.0.4] - 2025-04-25 - Javier
+## Added
+- useFormValidations.ts en "src/utils", esta clase se encargará de comprobar que el inicio de sesión está bien formado, mandado errores al usuario en el caso de que su correo electrónico no sea correcto.
+## Improved
+- Clases ForgotPassword, ahora estas manejan mejor los errores, y tienen más comprobaciones en el input por el usuario de su correo electrónico.
+
 ## [v0.0.3.5] - 2025-04-25 - Javier
 ## Added
 - REACT.md con información útil sobre la construcción del proyecto, y una pequeña guía sobre como trabajar con React Native.

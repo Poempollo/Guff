@@ -13,6 +13,7 @@ const SignUpScreen = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const [submitted, setSubmitted] = useState(false);
     const [fontsLoaded] = useFonts({
         Montserrat_500Medium,
         Montserrat_700Bold,
@@ -21,9 +22,10 @@ const SignUpScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     const handleSignUp = useCallback(() => {
-        console.log('Registrando: ', {email, username, password, name});
-
+        setSubmitted(true);
+    
         if (email && username && password && name) {
+            console.log('Registrando: ', {email, username, password, name});
             navigation.navigate('Home');
         }
     }, [email, username, password, name]);
@@ -43,10 +45,11 @@ const SignUpScreen = () => {
                 username={username}
                 password={password}
                 name={name}
+                showErrors={submitted}
                 onEmailChange={setEmail}
                 onUsernameChange={setUsername}
                 onPasswordChange={setPassword}
-                onNameChange={setName}
+                onNameChange={setName}  
             />
             <TouchableOpacity style={styles.button} onPress={handleSignUp}>
                 <Text style={styles.buttonText}>Registrarse</Text>
