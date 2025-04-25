@@ -70,7 +70,7 @@ git status
 - Ver historial
 git log --oneline --graph
 
-- Cambiar rama
+- Cambiar ramas
 git checkout nombre-rama
 
 - Crear rama y cambiar
@@ -87,3 +87,9 @@ Editar archivo + git add + git commit
 
 - Ver ramas
 git branch
+
+- Borrar rama (SOLO CUANDO SE ESTÁ SEGURO DE QUE ESTÁ MERGEADA Y EL DESARROLLO HA CONTINUADO)
+git branch -d nombre-de-la-rama
+
+- Para forzarla ya que a veces Git puede creer que no ha mergeado aunque si lo haya hecho, o queramos deshacernos de ella.
+git branch -D nombre-de-la-rama

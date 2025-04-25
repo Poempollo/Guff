@@ -1,6 +1,10 @@
 # Changelog
 
-
+## [v0.0.3.5] - 2025-04-25 - Javier
+## Added
+- REACT.md con información útil sobre la construcción del proyecto, y una pequeña guía sobre como trabajar con React Native.
+## Improved
+- GITHUB.md con más información útil.
 
 ## [v0.0.3.4] - 2025-04-24 - Raul
 ## Added
