@@ -15,7 +15,12 @@ const SignUpScreen = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [submitted, setSubmitted] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errors, setErrors] = useState({
+        name: '',
+        email: '',
+        username: '',
+        password: '',
+    });
     const [fontsLoaded] = useFonts({
         Montserrat_500Medium,
         Montserrat_700Bold,
@@ -32,10 +37,18 @@ const SignUpScreen = () => {
         const usernameError = validateUsername(username);
         const passwordError = validatePassword(password);
 
-        if (nameError || emailError || passwordError || usernameError) {
-            setErrorMessage(nameError || emailError || passwordError || usernameError);
-            return;
-        }
+        const newErrors = {
+            name: nameError,
+            email: emailError,
+            username: usernameError,
+            password: passwordError,
+        };
+
+        setErrors(newErrors);
+
+        if (nameError || emailError || passwordError || usernameError) return;
+
+        // Llamada a la API
     
         console.log('Registrando: ', {email, username, password, name});
         navigation.navigate('Home');
@@ -61,7 +74,7 @@ const SignUpScreen = () => {
                 onUsernameChange={setUsername}
                 onPasswordChange={setPassword}
                 onNameChange={setName}  
-                errorMessage={errorMessage}
+                errors={errors}
             />
             <TouchableOpacity style={styles.button} onPress={handleSignUp}>
                 <Text style={styles.buttonText}>Registrarse</Text>

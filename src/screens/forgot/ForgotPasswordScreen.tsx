@@ -30,9 +30,12 @@ const ForgotPasswordScreen = () => {
     }
     Alert.alert(
       "Correo enviado", 
-      `Se han enviado instrucciones a ${email}. 
-      Complete el proceso de cambio de contraseña, y vuelva a iniciar sesión`);
-    // Aquí podrías llamar a una API para enviar el correo de recuperación
+      `Se han enviado instrucciones a ${email} 
+      Complete el proceso de cambio de contraseña, 
+      y vuelva a iniciar sesión`);
+
+    // Llamada a la API
+    
     navigation.goBack();
   }, [email, navigation]);
 

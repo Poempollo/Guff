@@ -40,7 +40,8 @@ export const validatePassword = (password: string) => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
     if (!password.trim()) return "La contraseña es obligatoria";
     if (password.length < 8) return "La contraseña debe tener al menos 8 caracteres";
-    if (!passwordRegex.test(password)) return "La contraseña debe contener al menos una mayúscula, una minúcula y un número "
+    if (!passwordRegex.test(password)) return "La contraseña debe contener al menos una mayúscula, una minúcula y un número ";
+    return "";
 }
   
   

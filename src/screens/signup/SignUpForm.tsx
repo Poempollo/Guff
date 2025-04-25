@@ -12,7 +12,12 @@ type Props = {
     onUsernameChange: (text: string) => void;
     onPasswordChange: (text: string) => void;
     showErrors: boolean;
-    errorMessage: string;
+    errors: {
+        name: string;
+        email: string;
+        username: string;
+        password: string;
+    }
 };
 
 const SignUpForm = ({
@@ -25,7 +30,7 @@ const SignUpForm = ({
     onUsernameChange, 
     onPasswordChange,
     showErrors,
-    errorMessage,
+    errors,
 }: Props) => {
     return (
         <View style={styles.inputContainer}>
@@ -35,7 +40,19 @@ const SignUpForm = ({
                 value={name}
                 onChangeText={onNameChange}
             />
-            {showErrors && nameError && <Text style={styles.errorText}>{nameError}</Text>}
+            {showErrors && errors.name && (
+                <Text style={styles.errorText}>{errors.name}</Text>
+            )}
+
+            <TextInput
+                style={styles.input}
+                placeholder="Nombre de usuario"
+                value={username}
+                onChangeText={onUsernameChange}
+            />
+            {showErrors && errors.username && (
+                <Text style={styles.errorText}>{errors.username}</Text>
+            )}
 
             <TextInput
                 style={styles.input}
@@ -44,15 +61,9 @@ const SignUpForm = ({
                 value={email}
                 onChangeText={onEmailChange}
             />
-            {showErrors && nameError && <Text style={styles.errorText}>{nameError}</Text>}
-
-            <TextInput
-                style={styles.input}
-                placeholder="Nombre de usuario"
-                value={username}
-                onChangeText={onUsernameChange}
-            />
-            {showErrors && nameError && <Text style={styles.errorText}>{nameError}</Text>}
+            {showErrors && errors.email && (
+                <Text style={styles.errorText}>{errors.email}</Text>
+            )}
 
             <TextInput
                 style={styles.input}
@@ -61,7 +72,9 @@ const SignUpForm = ({
                 value={password}
                 onChangeText={onPasswordChange}
             />
-            {showErrors && passwordError && <Text style={styles.errorText}>{nameError}</Text>}
+            {showErrors && errors.password && (
+                <Text style={styles.errorText}>{errors.password}</Text>
+            )}
         </View>
     );
 };

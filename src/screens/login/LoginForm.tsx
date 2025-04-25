@@ -7,9 +7,21 @@ type Props = {
     password: string;
     onEmailChange: (text: string) => void;
     onPasswordChange: (text: string) => void;
+    showErrors: boolean;
+    errors: {
+        email: string;
+        password: string;
+    };
 };
 
-const LoginForm = ({ email, password, onEmailChange, onPasswordChange }: Props) => {
+const LoginForm = 
+({ email, 
+    password, 
+    onEmailChange, 
+    onPasswordChange, 
+    showErrors,
+    errors,
+}: Props) => {
     return (
         <View style={styles.inputContainer}>
             <TextInput 
@@ -19,7 +31,9 @@ const LoginForm = ({ email, password, onEmailChange, onPasswordChange }: Props) 
                 value={email}
                 onChangeText={onEmailChange}
             />
-            {email === '' && <Text style={styles.errorText}>Correo necesario</Text>}
+            {showErrors && errors.email && (
+                <Text style={styles.errorText}>{errors.email}</Text>
+            )}
 
             <TextInput 
                 style={styles.input}
@@ -28,7 +42,9 @@ const LoginForm = ({ email, password, onEmailChange, onPasswordChange }: Props) 
                 value={password}
                 onChangeText={onPasswordChange}
             />
-            {password === '' && <Text style={styles.errorText}>Contraseña necesaria</Text>}
+            {showErrors && errors.password && (
+                <Text style={styles.errorText}>{errors.password}</Text>
+            )}
         </View>
     );
 };
