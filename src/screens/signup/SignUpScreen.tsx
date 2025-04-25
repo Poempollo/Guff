@@ -7,6 +7,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../App';
 import styles from '../../styles/LoginStyles';
 import SignUpForm from './SignUpForm';
+import { validateEmail, validateName, validateUsername, validatePassword } from '../../utils/useFormValidation';
 
 const SignUpScreen = () => {
     const [email, setEmail] = useState('');
@@ -14,6 +15,7 @@ const SignUpScreen = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [fontsLoaded] = useFonts({
         Montserrat_500Medium,
         Montserrat_700Bold,
@@ -23,12 +25,21 @@ const SignUpScreen = () => {
 
     const handleSignUp = useCallback(() => {
         setSubmitted(true);
-    
-        if (email && username && password && name) {
-            console.log('Registrando: ', {email, username, password, name});
-            navigation.navigate('Home');
+
+        // validaciones de credenciales
+        const nameError = validateName(name);
+        const emailError = validateEmail(email);
+        const usernameError = validateUsername(username);
+        const passwordError = validatePassword(password);
+
+        if (nameError || emailError || passwordError || usernameError) {
+            setErrorMessage(nameError || emailError || passwordError || usernameError);
+            return;
         }
-    }, [email, username, password, name]);
+    
+        console.log('Registrando: ', {email, username, password, name});
+        navigation.navigate('Home');
+    }, [email, username, password, name, navigation]);
 
     if (!fontsLoaded) return null;
 
@@ -50,6 +61,7 @@ const SignUpScreen = () => {
                 onUsernameChange={setUsername}
                 onPasswordChange={setPassword}
                 onNameChange={setName}  
+                errorMessage={errorMessage}
             />
             <TouchableOpacity style={styles.button} onPress={handleSignUp}>
                 <Text style={styles.buttonText}>Registrarse</Text>

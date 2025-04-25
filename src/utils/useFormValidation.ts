@@ -23,5 +23,24 @@ export const validateEmail = (email: string) => {
     console.log('Validación exitosa');
     return "";  // Si pasa todas las validaciones, devolvemos una cadena vacía.
   };
+
+export const validateName = (name: string) => {
+    if (!name.trim()) return "El nombre es obligatorio";
+    if (name.length < 2) return "El nombre debe tener al menos 2 caracteres";
+    return "";
+};
+
+export const validateUsername = (username: string) => {
+    if(!username.trim()) return "El nombre de usuario es obligatorio";
+    if (username.length < 4) return "El nombre de usuario debe tener al menos 4 caracteres";
+    return "";
+}
+
+export const validatePassword = (password: string) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!password.trim()) return "La contraseña es obligatoria";
+    if (password.length < 8) return "La contraseña debe tener al menos 8 caracteres";
+    if (!passwordRegex.test(password)) return "La contraseña debe contener al menos una mayúscula, una minúcula y un número "
+}
   
   

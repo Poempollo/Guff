@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.0.4.1] - 2025-04-25 - Javier
+## Added
+- useFormValidations.ts ahora incluye validaciones para contraseña, nombre y nombre de usuario, para ser reutilizables por todas las vistas que trabajan con credenciales.
+## Improved
+- Las validaciones para los archivos SignUp ahora son mejores, se comprueba más, de manera más encapsulada y mejor.
+
 ## [v0.0.4] - 2025-04-25 - Javier
 ## Added
 - useFormValidations.ts en "src/utils", esta clase se encargará de comprobar que el inicio de sesión está bien formado, mandado errores al usuario en el caso de que su correo electrónico no sea correcto.

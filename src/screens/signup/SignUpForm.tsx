@@ -12,6 +12,7 @@ type Props = {
     onUsernameChange: (text: string) => void;
     onPasswordChange: (text: string) => void;
     showErrors: boolean;
+    errorMessage: string;
 };
 
 const SignUpForm = ({
@@ -24,6 +25,7 @@ const SignUpForm = ({
     onUsernameChange, 
     onPasswordChange,
     showErrors,
+    errorMessage,
 }: Props) => {
     return (
         <View style={styles.inputContainer}>
@@ -33,7 +35,7 @@ const SignUpForm = ({
                 value={name}
                 onChangeText={onNameChange}
             />
-            {showErrors && name === '' && <Text style={styles.errorText}>Nombre necesario</Text>}
+            {showErrors && nameError && <Text style={styles.errorText}>{nameError}</Text>}
 
             <TextInput
                 style={styles.input}
@@ -42,7 +44,7 @@ const SignUpForm = ({
                 value={email}
                 onChangeText={onEmailChange}
             />
-            {showErrors && email === '' && <Text style={styles.errorText}>Correo necesario</Text>}
+            {showErrors && nameError && <Text style={styles.errorText}>{nameError}</Text>}
 
             <TextInput
                 style={styles.input}
@@ -50,7 +52,7 @@ const SignUpForm = ({
                 value={username}
                 onChangeText={onUsernameChange}
             />
-            {showErrors && username === '' && <Text style={styles.errorText}>Usuario necesario</Text>}
+            {showErrors && nameError && <Text style={styles.errorText}>{nameError}</Text>}
 
             <TextInput
                 style={styles.input}
@@ -59,7 +61,7 @@ const SignUpForm = ({
                 value={password}
                 onChangeText={onPasswordChange}
             />
-            {showErrors && password === '' && <Text style={styles.errorText}>Contraseña necesario</Text>}
+            {showErrors && passwordError && <Text style={styles.errorText}>{nameError}</Text>}
         </View>
     );
 };
