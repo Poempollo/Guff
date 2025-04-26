@@ -5,9 +5,11 @@ import styles from '../../styles/LoginStyles';
 type Props = {
     email: string;
     onEmailChange: (text: string) => void;
+    showErrors: boolean;
+    errorMessage: string;
 };
 
-const ForgotPasswordForm = ({ email, onEmailChange }: Props) => {
+const ForgotPasswordForm = ({ email, onEmailChange, showErrors, errorMessage }: Props) => {
     return (
         <View style={styles.inputContainer}>
             <TextInput 
@@ -17,7 +19,9 @@ const ForgotPasswordForm = ({ email, onEmailChange }: Props) => {
                 value={email}
                 onChangeText={onEmailChange}
             />
-            {email === '' && <Text style={styles.errorText}>Correo necesario</Text>}
+            {showErrors && errorMessage && (
+                <Text style={styles.errorText}>{errorMessage}</Text>
+            )}
         </View>
     );
 };

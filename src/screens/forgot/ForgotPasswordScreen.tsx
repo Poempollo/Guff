@@ -7,9 +7,12 @@ import { useFonts } from 'expo-font';
 import { Montserrat_500Medium, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import ForgotPasswordForm from './ForgotPasswordForm';
 import styles from '../../styles/LoginStyles';
+import { validateEmail } from '../../utils/useFormValidation';
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const [fontsLoaded] = useFonts({
@@ -18,13 +21,23 @@ const ForgotPasswordScreen = () => {
   });
 
   const handleResetPassword = useCallback(() => {
-    if (email) {
-      Alert.alert("Correo enviado", `Se han enviado instrucciones a ${email}`);
-      // Aquí podrías llamar a una API para enviar el correo de recuperación
-    } else {
-      Alert.alert("Error", "Por favor ingresa tu correo electrónico");
+    setSubmitted(true);
+    
+    const emailError = validateEmail(email);
+    if(emailError) {
+      setErrorMessage(emailError);
+      return;
     }
-  }, [email]);
+    Alert.alert(
+      "Correo enviado", 
+      `Se han enviado instrucciones a ${email} 
+      Complete el proceso de cambio de contraseña, 
+      y vuelva a iniciar sesión`);
+
+    // Llamada a la API
+    
+    navigation.goBack();
+  }, [email, navigation]);
 
   if (!fontsLoaded) return null;
 
@@ -36,7 +49,12 @@ const ForgotPasswordScreen = () => {
         <Text style={styles.subtitle}>Te ayudaremos a recuperarla</Text>
       </View>
 
-      <ForgotPasswordForm email={email} onEmailChange={setEmail} />
+      <ForgotPasswordForm 
+        email={email} 
+        onEmailChange={setEmail} 
+        showErrors={submitted}
+        errorMessage={errorMessage}
+      />
 
       <TouchableOpacity style={styles.button} onPress={handleResetPassword}>
         <Text style={styles.buttonText}>Enviar instrucciones</Text>

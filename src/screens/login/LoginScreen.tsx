@@ -7,10 +7,16 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../App';
 import LoginForm from './LoginForm';
 import styles from '../../styles/LoginStyles';
+import { validateEmail, validatePassword } from '../../utils/useFormValidation';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+  });
   const [fontsLoaded] = useFonts({
     Montserrat_500Medium,
     Montserrat_700Bold,
@@ -25,6 +31,20 @@ const LoginScreen = () => {
    * si cambian email o password.
    */
   const handleLogin = useCallback(() => {
+    setSubmitted(true);
+
+    const emailError = validateEmail(email);
+    const passwordError = validatePassword(password);
+
+    const newErrors = {
+      email: emailError,
+      password: passwordError,
+    };
+
+    setErrors(newErrors);
+
+    if (emailError ||passwordError) return;
+
     console.log('Credenciales: ', email, password);
 
     if (email && password) {
@@ -33,7 +53,7 @@ const LoginScreen = () => {
   }, [email, password, navigation]);
 
   if (!fontsLoaded) {
-    return null; // O algún componente de carga
+    return null;
   }
 
   return (
@@ -49,6 +69,8 @@ const LoginScreen = () => {
         password={password}
         onEmailChange={setEmail}
         onPasswordChange={setPassword}
+        showErrors={submitted}
+        errors={errors}
       />
 
       <TouchableOpacity style={styles.button} onPress={(handleLogin)}>

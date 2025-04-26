@@ -67,6 +67,9 @@ git commit -m "mensaje"
 - Ver cambios
 git status
 
+- Ver ramas
+git branch
+
 - Ver historial
 git log --oneline --graph
 
@@ -93,3 +96,6 @@ git branch -d nombre-de-la-rama
 
 - Para forzarla ya que a veces Git puede creer que no ha mergeado aunque si lo haya hecho, o queramos deshacernos de ella.
 git branch -D nombre-de-la-rama
+
+- Para eliminar el registro de una rama remota eliminada que aún aparece en nuestro repositorio local
+git fetch -p
