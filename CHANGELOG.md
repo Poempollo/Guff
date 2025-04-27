@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.1.1] - 2025-04-28 - Raul
+#### Added
+- Añadido menú principal de Guff, también se ha creado dos archivos más dentro de la carpeta /home, que son ProfileSettings y SettingsScreen.
+- Se ha creado un archivo BottomTabsNavigator, que su funcionalidad es crear botones, en este caso se ha creado los botones de Home, Perfil y Configuración, se ha seguido la misma estructura que LoginForm y LoginScreen manteniendo los mismos colores.
+- En la carpeta /styles se han creado 3 archivos .ts (HomeScreenStyles, ProfileStyles y SettingsStyles), básicamente se ha creado para poder añadir sombras, colores y la misma fuente que se ha usado en los logins.
+- Hemos tenido que instalar previamente librerias, para poder personalizar el menú principal y que sea animado, esto es (- npm install @react-navigation/native @react-navigation/native-stack
+         - npm install react-native-reanimated).
+ - Para poder agregar react-native-reanimated, se ha tenido que crear un nuevo archivo .js llamado babel.config.js en la raiz del proyecto.
+ - En el archivo App.tsx se ha añadido lo siguiente:
+   - import BottomTabsNavigator from './src/navigation/BottomTabsNavigator';
+   - Profile: undefined;
+     Settings: undefined;
+   - <Stack.Screen name="Home" component={BottomTabsNavigator} /> 
+
 ## Minor Update
 ### [v0.1.0] - 2025-04-25 - Javier
 #### Added
