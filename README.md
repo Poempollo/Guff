@@ -10,27 +10,6 @@
 - Comentarios y "me gusta"
 - Navegación intuitiva
 
-## 🧱 Estructura del proyecto
-Guff/
-├── assets/               # Imágenes e iconos usados en la app
-├── src/
-│   ├── components/       # Componentes reutilizables
-│   ├── navigation/       # Configuración de navegación entre pantallas
-│   ├── screens/          # Vistas completas (como Login, Home, Perfil, etc.)
-│   ├── services/         # Lógica externa (auth, APIs, etc.)
-│   └── utils/            # Funciones auxiliares, helpers, constantes
-├── App.tsx               # Punto de entrada principal de la app
-├── index.ts              # Registro de la app
-├── app.json              # Configuración de la app Expo
-├── tsconfig.json         # Configuración de TypeScript
-├── .gitignore            # Archivos ignorados por git
-├── LICENSE               # Licencia del proyecto (MIT)
-├── CHANGELOG.md          # Historial de cambios por versión
-├── README.md             # Documentación general del proyecto
-├── package.json          # Dependencias y scripts de la app
-└── package-lock.json     # Lockfile de npm
-
-
 ## 🛠️ Tecnologías
 
 - React Native
@@ -53,6 +32,16 @@ Guff/
 
 ## 📄 Licencia
 
-Este proyecto está bajo la licencia [MIT](./LICENSE).
+Este proyecto está licenciado bajo la licencia 
+[Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/). 
 
+[Ver Licencia](./LICENSE)
 
+Puedes ver, compartir y descargar este software, pero **no puedes modificarlo ni utilizarlo con fines comerciales** 
+sin nuestro permiso explícito. Todos los derechos reservados a:
+
+- Ana Nerea Merchán Villaba  
+- Ana Felipe Rufilanchas  
+- José Raúl Gil Jiménez  
+- Lucas Sierra Tapia  
+- Javier Soria Alguacil

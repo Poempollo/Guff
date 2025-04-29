@@ -8,6 +8,7 @@ import { RootStackParamList } from '../../../App';
 import LoginForm from './LoginForm';
 import styles from '../../styles/LoginStyles';
 import { validateEmail, validatePassword } from '../../utils/useFormValidation';
+import { loginUser } from '../../api/authApi';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -30,25 +31,22 @@ const LoginScreen = () => {
    * useCallback() guarda la función en memoria, y solo se re-renderiza
    * si cambian email o password.
    */
-  const handleLogin = useCallback(() => {
+  const handleLogin = useCallback(async () => {
     setSubmitted(true);
 
     const emailError = validateEmail(email);
     const passwordError = validatePassword(password);
-
-    const newErrors = {
-      email: emailError,
-      password: passwordError,
-    };
-
+    const newErrors = { email: emailError, password: passwordError };
     setErrors(newErrors);
 
     if (emailError ||passwordError) return;
 
-    console.log('Credenciales: ', email, password);
-
-    if (email && password) {
+    try {
+      const data = await loginUser(email, password);
+      console.log('Login correcto: ', data);
       navigation.navigate('Home');
+    } catch (error) {
+      console.error('Error al iniciar sesión: ', error);
     }
   }, [email, password, navigation]);
 
