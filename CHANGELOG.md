@@ -1,5 +1,12 @@
 # Changelog
 
+
+### [v.1.3] - 2025-04-30 - Raul
+#### Added
+- Añadido para crear logo de la app.
+- Insertado en carpeta "assets" logo.
+- Sustituido Text y lo que tenia, por una imagen.
+
 ### [v0.1.2] - 2025-04-29 - Javier
 #### Added
 - Manejo de la API desde el front hacia el back. 
