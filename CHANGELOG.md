@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.1.2.1] - 2025-04-30 - Javier
+#### Added
+- Inicio de sesión desde la api hacia el backend desplegado en Railway correcto.
+
 ### [v0.1.2] - 2025-04-29 - Javier
 #### Added
 - Manejo de la API desde el front hacia el back. 
