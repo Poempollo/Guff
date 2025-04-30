@@ -9,11 +9,14 @@ import LoginForm from './LoginForm';
 import styles from '../../styles/LoginStyles';
 import { validateEmail, validatePassword } from '../../utils/useFormValidation';
 import { loginUser } from '../../api/authApi';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [loginFailed, setLoginFailed] = useState(false);
   const [errors, setErrors] = useState({
     email: '',
     password: '',
@@ -24,6 +27,18 @@ const LoginScreen = () => {
   });
 
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const handleEmailChange = (text: string) => {
+    setEmail(text);
+    if (loginFailed) setLoginFailed(false);
+    if (loginError) setLoginError('')
+  };
+
+  const handlePasswordChange = (text: string) => {
+    setPassword(text);
+    if (loginFailed) setLoginFailed(false);
+    if (loginError) setLoginError('')
+  };
 
   /**
    * 
@@ -44,9 +59,12 @@ const LoginScreen = () => {
     try {
       const data = await loginUser(email, password);
       console.log('Login correcto: ', data);
+      setLoginError('');
       navigation.navigate('Home');
     } catch (error) {
       console.error('Error al iniciar sesión: ', error);
+      setLoginError('Credenciales de inicio de sesión incorrectas')
+      setLoginFailed(true);
     }
   }, [email, password, navigation]);
 
@@ -55,35 +73,39 @@ const LoginScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Text style={styles.logo}>🐾</Text>
-        <Text style={styles.title}>Guff</Text>
-        <Text style={styles.subtitle}>Para nuestros mejores amigos peludos</Text>
-      </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <View style={styles.logoContainer}>
+          <Text style={styles.logo}>🐾</Text>
+          <Text style={styles.title}>Guff</Text>
+          <Text style={styles.subtitle}>Para nuestros mejores amigos peludos</Text>
+        </View>
 
-      <LoginForm 
-        email={email}
-        password={password}
-        onEmailChange={setEmail}
-        onPasswordChange={setPassword}
-        showErrors={submitted}
-        errors={errors}
-      />
+        <LoginForm 
+          email={email}
+          password={password}
+          onEmailChange={handleEmailChange}
+          onPasswordChange={handlePasswordChange}
+          showErrors={submitted}
+          errors={errors}
+          loginFailed={loginFailed}
+        />
 
-      <TouchableOpacity style={styles.button} onPress={(handleLogin)}>
-        <Text style={styles.buttonText}>Iniciar Sesión</Text>
-      </TouchableOpacity>
-
-      <View style={styles.footerContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-          <Text style={styles.footerLink}>¿No tienes cuenta? Regístrate</Text>
+        {loginError !== '' && <Text style={styles.errorText}>{loginError}</Text>}
+        <TouchableOpacity style={styles.button} onPress={(handleLogin)}>
+          <Text style={styles.buttonText}>Iniciar Sesión</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-          <Text style={styles.footerLink}>¿Olvidaste tu contraseña?</Text>
-        </TouchableOpacity>
+
+        <View style={styles.footerContainer}>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+            <Text style={styles.footerLink}>¿No tienes cuenta? Regístrate</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+            <Text style={styles.footerLink}>¿Olvidaste tu contraseña?</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

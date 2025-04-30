@@ -3,6 +3,6 @@ export const colors = {
     background: '#e6f0f2',
     text: '#333',
     subtitle: '#777',
-    error: 'red',
+    error: '#e63946',
     white: '#fff',
 }

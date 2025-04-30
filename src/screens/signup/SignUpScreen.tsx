@@ -8,6 +8,7 @@ import { RootStackParamList } from '../../../App';
 import styles from '../../styles/LoginStyles';
 import SignUpForm from './SignUpForm';
 import { validateEmail, validateName, validateUsername, validatePassword } from '../../utils/useFormValidation';
+import { registerUser } from '../../api/authApi';
 
 const SignUpScreen = () => {
     const [email, setEmail] = useState('');
@@ -28,7 +29,17 @@ const SignUpScreen = () => {
 
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-    const handleSignUp = useCallback(() => {
+    const handleUsernameChange = (text: string) => {
+        setUsername(text);
+        if (errors.username) setErrors(prev => ({ ...prev, username: '' }));
+      };
+      
+      const handleEmailChange = (text: string) => {
+        setEmail(text);
+        if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
+      };
+
+    const handleSignUp = useCallback(async () => {
         setSubmitted(true);
 
         // validaciones de credenciales
@@ -48,10 +59,19 @@ const SignUpScreen = () => {
 
         if (nameError || emailError || passwordError || usernameError) return;
 
-        // Llamada a la API
-    
-        console.log('Registrando: ', {email, username, password, name});
-        navigation.navigate('Home');
+        try {
+            await registerUser(name, email, username, password);
+            navigation.navigate('Home');
+        } catch (error: any) {
+            console.error('Error al registrar: ', error);
+
+            if (typeof error === 'object') {
+                setErrors(prev => ({
+                    ...prev,
+                    ...error
+                }));
+            }
+        }
     }, [email, username, password, name, navigation]);
 
     if (!fontsLoaded) return null;
@@ -70,8 +90,8 @@ const SignUpScreen = () => {
                 password={password}
                 name={name}
                 showErrors={submitted}
-                onEmailChange={setEmail}
-                onUsernameChange={setUsername}
+                onEmailChange={handleEmailChange}
+                onUsernameChange={handleUsernameChange}
                 onPasswordChange={setPassword}
                 onNameChange={setName}  
                 errors={errors}
