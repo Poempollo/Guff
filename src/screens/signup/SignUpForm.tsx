@@ -1,6 +1,7 @@
 import React from "react";
 import {View, TextInput, Text } from 'react-native';
 import styles from '../../styles/LoginStyles';
+import { colors } from "../../styles/theme";
 
 type Props = {
     name: string;
@@ -45,7 +46,7 @@ const SignUpForm = ({
             )}
 
             <TextInput
-                style={styles.input}
+                style={[styles.input, showErrors && errors.username && styles.inputError]}
                 placeholder="Nombre de usuario"
                 value={username}
                 onChangeText={onUsernameChange}
@@ -55,7 +56,7 @@ const SignUpForm = ({
             )}
 
             <TextInput
-                style={styles.input}
+                style={[styles.input, showErrors && errors.email && styles.inputError]}
                 placeholder="Correo Electrónico"
                 keyboardType="email-address"
                 value={email}

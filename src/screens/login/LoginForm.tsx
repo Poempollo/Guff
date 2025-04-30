@@ -1,6 +1,7 @@
 import React from "react";
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 import styles from '../../styles/LoginStyles';
+import { colors } from '../../styles/theme';
 
 type Props = {
     email: string;
@@ -12,6 +13,7 @@ type Props = {
         email: string;
         password: string;
     };
+    loginFailed: boolean;
 };
 
 const LoginForm = 
@@ -21,13 +23,17 @@ const LoginForm =
     onPasswordChange, 
     showErrors,
     errors,
+    loginFailed,
 }: Props) => {
     return (
         <View style={styles.inputContainer}>
             <TextInput 
-                style={styles.input}
+                style={[styles.input, loginFailed && styles.inputError]}
                 placeholder="Correo Electrónico"
                 keyboardType="email-address"
+                autoCapitalize="none"
+                autoFocus
+                returnKeyType="next"
                 value={email}
                 onChangeText={onEmailChange}
             />
@@ -36,9 +42,10 @@ const LoginForm =
             )}
 
             <TextInput 
-                style={styles.input}
+                style={[styles.input, loginFailed && styles.inputError]}
                 placeholder="Contraseña"
                 secureTextEntry
+                returnKeyType="done"
                 value={password}
                 onChangeText={onPasswordChange}
             />

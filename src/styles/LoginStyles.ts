@@ -65,6 +65,16 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: colors.primary,
     },
+    inputError: {
+        backgroundColor: colors.white,
+        padding: 15,
+        borderRadius: 10,
+        marginBottom: 10,
+        fontSize: 16,
+        color: colors.text,
+        borderWidth: 2,
+        borderColor: colors.error,
+    },
     errorText: {
         color: colors.error,
         fontSize: 12,

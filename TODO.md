@@ -1,7 +1,7 @@
 # To do
 
-## [2025-04-29] - Conexión con la API - Javier
-- Conseguir que el front trabaje y se conecte a la api y bd en railway.
-- Añadir las conexiones en el Login y el Registro.
+## [2025-04-30] - Conexión con la API - Javier
+- Añadir las conexiones en el Registro.
+- Mejoras para el SignUp y Login, Loading State al hacer login para que aparezca un spinner, o deshabilitar el botón mientras se espera la respuesta.
 
 ## Nada por ahora 🕺💃
