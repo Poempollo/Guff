@@ -14,8 +14,10 @@ export default StyleSheet.create({
         marginBottom: 30,
     },
     logo: {
-        fontSize: 60,
-        color: colors.primary,
+        width: 100,
+        height: 100,
+        marginBottom: 10,
+        alignSelf: 'center',
     },
     title: {
         fontSize: 24,
