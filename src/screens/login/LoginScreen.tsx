@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 import { Montserrat_500Medium, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { useNavigation } from '@react-navigation/native';
@@ -76,7 +76,11 @@ const LoginScreen = () => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <View style={styles.logoContainer}>
-          <Text style={styles.logo}>🐾</Text>
+          <Image
+            source={require('../.././../assets/logo.png')} // Ajusta la ruta según tu estructura
+            style={styles.logo}
+            resizeMode="contain"
+          />
           <Text style={styles.title}>Guff</Text>
           <Text style={styles.subtitle}>Para nuestros mejores amigos peludos</Text>
         </View>

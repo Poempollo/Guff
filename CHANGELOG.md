@@ -1,15 +1,17 @@
 # Changelog
 
-### [v0.1.2.2] - 2025-04-30 - Javier
+## Minor Update
+### [v.0.2.0] - 2025-04-30 - Raul & Javier
 #### Added
-- Errores de credenciales más visibles desde la vista de inicio de sesión.
+- Conexión del Login y SignUp con la API.
+- Añadido para crear logo de la app.
+- Insertado en carpeta "assets" logo.
+- Sustituido Text y lo que tenia, por una imagen.
+- Inicio de sesión desde la api hacia el backend desplegado en Railway correcto.
+- Errores de credenciales más visibles desde la vista de inicio de sesión
 #### Improved
 - Mejorado el funcionamiento interno de la vista de Login y SignUp.
 - Mejoras en la UX y la experiencia de usuario en Login y SignUp. Ahora al pulsar fuera de un input o el teclado, este se cierra. Al volver a escribir tras un error en las credenciales, el borde rojo del input, se va, así como el mensaje de error.
-
-### [v0.1.2.1] - 2025-04-30 - Javier
-#### Added
-- Inicio de sesión desde la api hacia el backend desplegado en Railway correcto.
 
 ### [v0.1.2] - 2025-04-29 - Javier
 #### Added
