@@ -1,5 +1,10 @@
 # Changelog
 
+### [v0.2.1] - 2025-05-01 - Javier
+#### Improved
+- Ahora tanto la vista de registro, como la de contraseña olvidada detectan toques fuera del teclado o un input, y cierran el teclado del dispositivo.
+- La vista de contraseña olvidada, ahora muestra también el logo de la app.
+
 ## Minor Update
 ### [v.0.2.0] - 2025-04-30 - Raul & Javier
 #### Added
