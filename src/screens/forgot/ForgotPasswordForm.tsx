@@ -7,13 +7,14 @@ type Props = {
     onEmailChange: (text: string) => void;
     showErrors: boolean;
     errorMessage: string;
+    serverError: string;
 };
 
-const ForgotPasswordForm = ({ email, onEmailChange, showErrors, errorMessage }: Props) => {
+const ForgotPasswordForm = ({ email, onEmailChange, showErrors, errorMessage, serverError }: Props) => {
     return (
         <View style={styles.inputContainer}>
             <TextInput 
-                style={styles.input}
+                style={[styles.input, !!serverError && styles.inputError]}
                 placeholder="Correo Electrónico"
                 keyboardType="email-address"
                 autoCapitalize="none"

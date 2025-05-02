@@ -43,3 +43,23 @@ export const registerUser = async (name: string, email: string, username: string
         throw error;
     }
 }
+
+export const forgotPassword = async (email: string) => {
+    try {
+        const response = await fetch('https://guff-api-production.up.railway.app/auth/forgot-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+        })
+
+        if (!response.ok) {
+            throw new Error('No se pudo enviar el correo de recuperación.');
+        }
+    } catch (error: any) {
+        if (error instanceof TypeError) {
+            throw new Error('No se pudo conectar con el servidor. Inténtelo de nuevo más tarde.')
+        }
+
+        throw error;
+    }
+}

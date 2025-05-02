@@ -1,5 +1,10 @@
 # Changelog
 
+### [v0.2.3] - 2025-05-02 - Javier
+#### Added
+- Añadida una función que hace que la vista de cambiar contraseña, envíe un correo electrónico. Falta la parte del cambio, un front que lo gestione y un back que modifique la BD.
+- Manejo de errores para la vista de forgotpassword screen.
+
 ### [v0.2.2] - 2025-05-02 - Javier
 #### Improved
 - Mejoras en la experiencia de usuario, ahora hay diferenciación de errores en las vistas de entrada a la aplicación. Tenemos un error para credenciales incorrectas, y otro para cuando el servidor no está disponible.
