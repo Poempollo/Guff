@@ -78,7 +78,13 @@ export default StyleSheet.create({
     errorText: {
         color: colors.error,
         fontSize: 12,
-        marginTop: -5,
+        marginTop: -6,
         marginBottom: 10,
     },      
+    bigErrorMessage: {
+        color: colors.error,
+        fontWeight: '500',
+        fontSize: 16,
+        marginBottom: 20,
+    },   
 });

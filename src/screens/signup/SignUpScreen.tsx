@@ -24,6 +24,7 @@ const SignUpScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [signUpError, setSignUpError] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({
     name: "",
@@ -39,6 +40,11 @@ const SignUpScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+  const handleNameChange = (text: string) => {
+    setName(text);
+    if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
+  };
+
   const handleUsernameChange = (text: string) => {
     setUsername(text);
     if (errors.username) setErrors((prev) => ({ ...prev, username: "" }));
@@ -47,6 +53,11 @@ const SignUpScreen = () => {
   const handleEmailChange = (text: string) => {
     setEmail(text);
     if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+  };
+
+  const handlePasswordChange = (text: string) => {
+    setPassword(text);
+    if (errors.password) setErrors((prev) => ({ ...prev, password: "" }));
   };
 
   const handleSignUp = useCallback(async () => {
@@ -75,7 +86,9 @@ const SignUpScreen = () => {
     } catch (error: any) {
       console.error("Error al registrar: ", error);
 
-      if (typeof error === "object") {
+      if (error.message === 'No se pudo conectar con el servidor. Inténtelo de nuevo más tarde.') {
+        setSignUpError(error.message);
+      } else if (typeof error === "object") {
         setErrors((prev) => ({
           ...prev,
           ...error,
@@ -107,10 +120,11 @@ const SignUpScreen = () => {
           showErrors={submitted}
           onEmailChange={handleEmailChange}
           onUsernameChange={handleUsernameChange}
-          onPasswordChange={setPassword}
-          onNameChange={setName}
+          onPasswordChange={handlePasswordChange}
+          onNameChange={handleNameChange}
           errors={errors}
         />
+        {signUpError !== '' && <Text style={styles.bigErrorMessage}>{signUpError}</Text>}
         <TouchableOpacity style={styles.button} onPress={handleSignUp}>
           <Text style={styles.buttonText}>Registrarse</Text>
         </TouchableOpacity>

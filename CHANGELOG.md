@@ -1,5 +1,11 @@
 # Changelog
 
+### [v0.2.2] - 2025-05-02 - Javier
+#### Improved
+- Mejoras en la experiencia de usuario, ahora hay diferenciación de errores en las vistas de entrada a la aplicación. Tenemos un error para credenciales incorrectas, y otro para cuando el servidor no está disponible.
+- Mejoras en la experiencia de usuario en las vistas de registro y contraseña olvidada, faltaban atributos para esas vistas que hacían que se fuese pasando de un campo al siguiente con un 'enter'.
+- Ahora aparecen más claramente los mensajes de error.
+
 ### [v0.2.1] - 2025-05-01 - Javier
 #### Improved
 - Ahora tanto la vista de registro, como la de contraseña olvidada detectan toques fuera del teclado o un input, y cierran el teclado del dispositivo.

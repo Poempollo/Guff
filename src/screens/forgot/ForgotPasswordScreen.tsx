@@ -23,17 +23,15 @@ const ForgotPasswordScreen = () => {
 
   const handleResetPassword = useCallback(() => {
     setSubmitted(true);
-    
+
     const emailError = validateEmail(email);
     if(emailError) {
       setErrorMessage(emailError);
       return;
     }
     Alert.alert(
-      "Correo enviado", 
-      `Se han enviado instrucciones a ${email} 
-      Complete el proceso de cambio de contraseña, 
-      y vuelva a iniciar sesión`);
+      "Correo enviado si existe.\n Complete el proceso de cambio de contraseña, y vuelva a iniciar sesión", 
+      `Se han enviado instrucciones a ${email}`);
 
     // Llamada a la API
     

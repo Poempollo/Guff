@@ -36,8 +36,11 @@ const SignUpForm = ({
     return (
         <View style={styles.inputContainer}>
             <TextInput
-                style={styles.input}
+                style={[styles.input, showErrors && errors.name && styles.inputError]}
                 placeholder="Nombre"
+                autoCapitalize="none"
+                autoFocus
+                returnKeyType="next"
                 value={name}
                 onChangeText={onNameChange}
             />
@@ -48,6 +51,8 @@ const SignUpForm = ({
             <TextInput
                 style={[styles.input, showErrors && errors.username && styles.inputError]}
                 placeholder="Nombre de usuario"
+                autoCapitalize="none"
+                returnKeyType="next"
                 value={username}
                 onChangeText={onUsernameChange}
             />
@@ -59,6 +64,8 @@ const SignUpForm = ({
                 style={[styles.input, showErrors && errors.email && styles.inputError]}
                 placeholder="Correo Electrónico"
                 keyboardType="email-address"
+                autoCapitalize="none"
+                returnKeyType="next"
                 value={email}
                 onChangeText={onEmailChange}
             />
@@ -67,9 +74,10 @@ const SignUpForm = ({
             )}
 
             <TextInput
-                style={styles.input}
+                style={[styles.input, showErrors && errors.password && styles.inputError]}
                 placeholder="Contraseña"
                 secureTextEntry
+                returnKeyType="done"
                 value={password}
                 onChangeText={onPasswordChange}
             />

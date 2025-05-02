@@ -16,6 +16,9 @@ const ForgotPasswordForm = ({ email, onEmailChange, showErrors, errorMessage }: 
                 style={styles.input}
                 placeholder="Correo Electrónico"
                 keyboardType="email-address"
+                autoCapitalize="none"
+                autoFocus
+                returnKeyType="next"
                 value={email}
                 onChangeText={onEmailChange}
             />

@@ -61,9 +61,13 @@ const LoginScreen = () => {
       console.log('Login correcto: ', data);
       setLoginError('');
       navigation.navigate('Home');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error al iniciar sesión: ', error);
-      setLoginError('Credenciales de inicio de sesión incorrectas')
+      if (error.message === 'No se pudo conectar con el servidor. Inténtelo de nuevo más tarde.') {
+        setLoginError(error.message);
+      } else {
+        setLoginError('Credenciales de inicio de sesión incorrectas');
+      }
       setLoginFailed(true);
     }
   }, [email, password, navigation]);
@@ -95,7 +99,7 @@ const LoginScreen = () => {
           loginFailed={loginFailed}
         />
 
-        {loginError !== '' && <Text style={styles.errorText}>{loginError}</Text>}
+        {loginError !== '' && <Text style={styles.bigErrorMessage}>{loginError}</Text>}
         <TouchableOpacity style={styles.button} onPress={(handleLogin)}>
           <Text style={styles.buttonText}>Iniciar Sesión</Text>
         </TouchableOpacity>
