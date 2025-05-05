@@ -1,5 +1,11 @@
 # Changelog
 
+### [v0.2.5] - 2025-05-06 - Javier
+#### Added
+- Spinners en los botones de inicio de sesión, que deshabilitan al botón, y que terminan de cargar cuanfo finaliza el proceso. Sin problemas de rendimiento, discretos.
+#### Improved
+- Ahora, al abrir la aplicación, no se abre directamente el teclado, he eliminado los autofocus en todas las vistas.
+
 ### [v0.2.4.1] - 2025-05-05 - Javier
 #### Added
 - Integrado otro campo en el signup, para que compruebe la contraseña que hemos puesto, el campo de repetir. Errores añadidos, sin fallos.

@@ -39,7 +39,6 @@ const SignUpForm = ({
                 style={[styles.input, showErrors && errors.username && styles.inputError]}
                 placeholder="Nombre de usuario"
                 autoCapitalize="none"
-                autoFocus
                 returnKeyType="next"
                 value={username}
                 onChangeText={onUsernameChange}

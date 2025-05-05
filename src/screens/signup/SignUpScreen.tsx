@@ -12,12 +12,12 @@ import styles from "../../styles/LoginStyles";
 import SignUpForm from "./SignUpForm";
 import {
   validateEmail,
-  validateName,
   validateUsername,
   validatePassword,
 } from "../../utils/useFormValidation";
 import { registerUser } from "../../api/authApi";
 import { Keyboard, TouchableWithoutFeedback } from "react-native";
+import { ActivityIndicator } from 'react-native';
 
 const SignUpScreen = () => {
   const [email, setEmail] = useState("");
@@ -26,6 +26,7 @@ const SignUpScreen = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [signUpError, setSignUpError] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({
     email: "",
     username: "",
@@ -81,6 +82,8 @@ const SignUpScreen = () => {
 
     if (emailError || passwordError || usernameError || passwordConfirmationError) return;
 
+    setLoading(true);
+
     try {
       await registerUser(email, username, password);
       navigation.navigate("Home");
@@ -95,6 +98,8 @@ const SignUpScreen = () => {
           ...error,
         }));
       }
+    } finally {
+      setLoading(false);
     }
   }, [email, username, password, passwordConfirmation, navigation]);
 
@@ -126,8 +131,16 @@ const SignUpScreen = () => {
           errors={errors}
         />
         {signUpError !== '' && <Text style={styles.bigErrorMessage}>{signUpError}</Text>}
-        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-          <Text style={styles.buttonText}>Registrarse</Text>
+        <TouchableOpacity 
+          style={[styles.button, loading && { opacity: 0.5 }]} 
+          onPress={handleSignUp}
+          disabled={loading}  
+        >
+          {loading ? (
+            <ActivityIndicator size="small" color="#fff"/>
+          ) : (
+            <Text style={styles.buttonText}>Registrarse</Text>
+          )}
         </TouchableOpacity>
 
         <View style={styles.footerContainer}>
