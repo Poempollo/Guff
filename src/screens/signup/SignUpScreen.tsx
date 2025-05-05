@@ -23,11 +23,9 @@ const SignUpScreen = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
   const [signUpError, setSignUpError] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({
-    name: "",
     email: "",
     username: "",
     password: "",
@@ -39,11 +37,6 @@ const SignUpScreen = () => {
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
-  const handleNameChange = (text: string) => {
-    setName(text);
-    if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
-  };
 
   const handleUsernameChange = (text: string) => {
     setUsername(text);
@@ -64,13 +57,11 @@ const SignUpScreen = () => {
     setSubmitted(true);
 
     // validaciones de credenciales
-    const nameError = validateName(name);
     const emailError = validateEmail(email);
     const usernameError = validateUsername(username);
     const passwordError = validatePassword(password);
 
     const newErrors = {
-      name: nameError,
       email: emailError,
       username: usernameError,
       password: passwordError,
@@ -78,10 +69,10 @@ const SignUpScreen = () => {
 
     setErrors(newErrors);
 
-    if (nameError || emailError || passwordError || usernameError) return;
+    if (emailError || passwordError || usernameError) return;
 
     try {
-      await registerUser(name, email, username, password);
+      await registerUser(email, username, password);
       navigation.navigate("Home");
     } catch (error: any) {
       console.error("Error al registrar: ", error);
@@ -95,7 +86,7 @@ const SignUpScreen = () => {
         }));
       }
     }
-  }, [email, username, password, name, navigation]);
+  }, [email, username, password, navigation]);
 
   if (!fontsLoaded) return null;
 
@@ -116,12 +107,10 @@ const SignUpScreen = () => {
           email={email}
           username={username}
           password={password}
-          name={name}
           showErrors={submitted}
           onEmailChange={handleEmailChange}
           onUsernameChange={handleUsernameChange}
           onPasswordChange={handlePasswordChange}
-          onNameChange={handleNameChange}
           errors={errors}
         />
         {signUpError !== '' && <Text style={styles.bigErrorMessage}>{signUpError}</Text>}

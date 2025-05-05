@@ -4,17 +4,14 @@ import styles from '../../styles/LoginStyles';
 import { colors } from "../../styles/theme";
 
 type Props = {
-    name: string;
     email: string;
     username: string;
     password: string;
-    onNameChange: (text: string) => void;
     onEmailChange: (text: string) => void;
     onUsernameChange: (text: string) => void;
     onPasswordChange: (text: string) => void;
     showErrors: boolean;
     errors: {
-        name: string;
         email: string;
         username: string;
         password: string;
@@ -22,11 +19,9 @@ type Props = {
 };
 
 const SignUpForm = ({
-    name,
     email,
     username,
     password,
-    onNameChange,
     onEmailChange, 
     onUsernameChange, 
     onPasswordChange,
@@ -35,19 +30,6 @@ const SignUpForm = ({
 }: Props) => {
     return (
         <View style={styles.inputContainer}>
-            <TextInput
-                style={[styles.input, showErrors && errors.name && styles.inputError]}
-                placeholder="Nombre"
-                autoCapitalize="none"
-                autoFocus
-                returnKeyType="next"
-                value={name}
-                onChangeText={onNameChange}
-            />
-            {showErrors && errors.name && (
-                <Text style={styles.errorText}>{errors.name}</Text>
-            )}
-
             <TextInput
                 style={[styles.input, showErrors && errors.username && styles.inputError]}
                 placeholder="Nombre de usuario"

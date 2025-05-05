@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.2.4] - 2025-05-05 - Javier
+#### Deleted
+- Cambios en el SignUp para evitar que guarde el campo nombre, ya que este no va a ser necesario. 
+
 ### [v0.2.3] - 2025-05-02 - Javier
 #### Added
 - Añadida una función que hace que la vista de cambiar contraseña, envíe un correo electrónico. Falta la parte del cambio, un front que lo gestione y un back que modifique la BD.
