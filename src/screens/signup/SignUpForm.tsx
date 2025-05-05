@@ -7,14 +7,17 @@ type Props = {
     email: string;
     username: string;
     password: string;
+    passwordConfirmation: string;
     onEmailChange: (text: string) => void;
     onUsernameChange: (text: string) => void;
     onPasswordChange: (text: string) => void;
+    onPasswordConfirmationChange: (text: string) => void;
     showErrors: boolean;
     errors: {
         email: string;
         username: string;
         password: string;
+        passwordConfirmation: string;
     }
 };
 
@@ -22,9 +25,11 @@ const SignUpForm = ({
     email,
     username,
     password,
+    passwordConfirmation,
     onEmailChange, 
     onUsernameChange, 
     onPasswordChange,
+    onPasswordConfirmationChange,
     showErrors,
     errors,
 }: Props) => {
@@ -34,6 +39,7 @@ const SignUpForm = ({
                 style={[styles.input, showErrors && errors.username && styles.inputError]}
                 placeholder="Nombre de usuario"
                 autoCapitalize="none"
+                autoFocus
                 returnKeyType="next"
                 value={username}
                 onChangeText={onUsernameChange}
@@ -56,15 +62,26 @@ const SignUpForm = ({
             )}
 
             <TextInput
-                style={[styles.input, showErrors && errors.password && styles.inputError]}
+                style={[styles.input, showErrors && (errors.password || errors.passwordConfirmation) && styles.inputError]}
                 placeholder="Contraseña"
                 secureTextEntry
-                returnKeyType="done"
+                returnKeyType="next"
                 value={password}
                 onChangeText={onPasswordChange}
             />
             {showErrors && errors.password && (
                 <Text style={styles.errorText}>{errors.password}</Text>
+            )}
+            <TextInput
+                style={[styles.input, showErrors && errors.passwordConfirmation && styles.inputError]}
+                placeholder="Confirmar contraseña"
+                secureTextEntry
+                returnKeyType="done"
+                value={passwordConfirmation}
+                onChangeText={onPasswordConfirmationChange}
+            />
+            {showErrors && errors.passwordConfirmation && (
+                <Text style={styles.errorText}>{errors.passwordConfirmation}</Text>
             )}
         </View>
     );

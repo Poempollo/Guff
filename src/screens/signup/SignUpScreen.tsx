@@ -23,12 +23,14 @@ const SignUpScreen = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [signUpError, setSignUpError] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({
     email: "",
     username: "",
     password: "",
+    passwordConfirmation: "",
   });
   const [fontsLoaded] = useFonts({
     Montserrat_500Medium,
@@ -53,6 +55,11 @@ const SignUpScreen = () => {
     if (errors.password) setErrors((prev) => ({ ...prev, password: "" }));
   };
 
+  const handlePasswordConfirmationChange = (text: string) => {
+    setPasswordConfirmation(text);
+    if (errors.passwordConfirmation) setErrors((prev) => ({ ...prev, passwordConfirmation: "" }));
+  };
+
   const handleSignUp = useCallback(async () => {
     setSubmitted(true);
 
@@ -60,16 +67,19 @@ const SignUpScreen = () => {
     const emailError = validateEmail(email);
     const usernameError = validateUsername(username);
     const passwordError = validatePassword(password);
+    const passwordConfirmationError = password !== passwordConfirmation 
+      ? "Las contraseñas no coinciden" : "";
 
     const newErrors = {
       email: emailError,
       username: usernameError,
       password: passwordError,
+      passwordConfirmation: passwordConfirmationError,
     };
 
     setErrors(newErrors);
 
-    if (emailError || passwordError || usernameError) return;
+    if (emailError || passwordError || usernameError || passwordConfirmationError) return;
 
     try {
       await registerUser(email, username, password);
@@ -86,7 +96,7 @@ const SignUpScreen = () => {
         }));
       }
     }
-  }, [email, username, password, navigation]);
+  }, [email, username, password, passwordConfirmation, navigation]);
 
   if (!fontsLoaded) return null;
 
@@ -107,10 +117,12 @@ const SignUpScreen = () => {
           email={email}
           username={username}
           password={password}
+          passwordConfirmation={passwordConfirmation}
           showErrors={submitted}
           onEmailChange={handleEmailChange}
           onUsernameChange={handleUsernameChange}
           onPasswordChange={handlePasswordChange}
+          onPasswordConfirmationChange={handlePasswordConfirmationChange}
           errors={errors}
         />
         {signUpError !== '' && <Text style={styles.bigErrorMessage}>{signUpError}</Text>}

@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.2.4.1] - 2025-05-05 - Javier
+#### Added
+- Integrado otro campo en el signup, para que compruebe la contraseña que hemos puesto, el campo de repetir. Errores añadidos, sin fallos.
+
 ### [v0.2.4] - 2025-05-05 - Javier
 #### Deleted
 - Cambios en el SignUp para evitar que guarde el campo nombre, ya que este no va a ser necesario. 
