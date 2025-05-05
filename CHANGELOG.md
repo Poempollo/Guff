@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.2.5.1] - 2025-05-06 - Javier
+#### Added
+- Preparado el funcionamiento de la splash screen personalizada.
+
 ### [v0.2.5] - 2025-05-06 - Javier
 #### Added
 - Spinners en los botones de inicio de sesión, que deshabilitan al botón, y que terminan de cargar cuanfo finaliza el proceso. Sin problemas de rendimiento, discretos.
