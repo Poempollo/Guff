@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../App";
 import styles from "../../styles/HomeScreenStyles";
+import ChatWindow from "../../components/ChatWindows";
+import FloatingChatBubble from "../../components/FloatingChatBubble";
 
 const HomeScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [showChat, setShowChat] = useState(true);
 
   return (
     <View style={styles.container}>
@@ -31,6 +34,9 @@ const HomeScreen = () => {
           <Text style={styles.buttonSecondaryText}>Configuración</Text>
         </TouchableOpacity>
       </View>
+
+      {showChat && <ChatWindow />}
+      <FloatingChatBubble onPress={() => setShowChat(!showChat)} />
     </View>
   );
 };

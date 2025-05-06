@@ -1,5 +1,10 @@
 # Changelog
 
+### [v0.2.6] - 2025-05-06 - Raul
+#### Added
+- Añadido Chatbot con OpenRouter, que utiliza chatgpt3.
+- Añadido componentes nuevos, y sonidos.
+
 ### [v0.2.5.4] - 2025-05-06 - Javier
 #### Improved
 - Añadida funcionalidad al botón de cerrar sesión em los ajustes.
@@ -29,6 +34,8 @@
 ### [v0.2.4] - 2025-05-05 - Javier
 #### Deleted
 - Cambios en el SignUp para evitar que guarde el campo nombre, ya que este no va a ser necesario. 
+=======
+
 
 ### [v0.2.3] - 2025-05-02 - Javier
 #### Added
