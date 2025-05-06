@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.2.5.2] - 2025-05-06 - Javier
+#### Added
+- Añadida la vista de Ajustes, con otras vistas legales. Simplemente front, aún no conecta con la api.
+
 ### [v0.2.5.1] - 2025-05-06 - Javier
 #### Added
 - Preparado el funcionamiento de la splash screen personalizada.

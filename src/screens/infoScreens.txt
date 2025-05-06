@@ -1,1 +1,0 @@
-Vistas completas, inicio de sesión, amigos, mascotas etc. "Las ventanas de la app".

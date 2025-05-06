@@ -1,27 +1,45 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
+import { colors } from "./theme";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
+    backgroundColor: colors.background,
+    paddingHorizontal: 20,
+    paddingTop: 30,
   },
   content: {
-    alignItems: 'center',
+    paddingBottom: 40,
   },
-  title: {
-    fontSize: 28,
-    fontFamily: 'Montserrat_700Bold',
-    color: '#333',
+  section: {
+    marginBottom: 30,
   },
-  subtitle: {
+  sectionTitle: {
     fontSize: 16,
-    fontFamily: 'Montserrat_500Medium',
-    color: '#666',
-    marginTop: 10,
-    textAlign: 'center',
+    fontWeight: "600",
+    color: "#888",
+    marginBottom: 10,
+  },
+  item: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 15,
+    borderBottomColor: "#eee",
+    borderBottomWidth: 1,
+  },
+  itemRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  itemIcon: {
+    marginRight: 12,
+  },
+  itemTitle: {
+    fontSize: 16,
+  },
+  itemDisabled: {
+    opacity: 0.5,
   },
 });
 
