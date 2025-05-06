@@ -10,6 +10,7 @@ import styles from '../../styles/LoginStyles';
 import { validateEmail, validatePassword } from '../../utils/useFormValidation';
 import { loginUser } from '../../api/authApi';
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -17,6 +18,7 @@ const LoginScreen = () => {
   const [loginError, setLoginError] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [loginFailed, setLoginFailed] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({
     email: '',
     password: '',
@@ -56,6 +58,8 @@ const LoginScreen = () => {
 
     if (emailError ||passwordError) return;
 
+    setLoading(true);
+
     try {
       const data = await loginUser(email, password);
       console.log('Login correcto: ', data);
@@ -69,6 +73,8 @@ const LoginScreen = () => {
         setLoginError('Credenciales de inicio de sesión incorrectas');
       }
       setLoginFailed(true);
+    } finally {
+      setLoading(false);
     }
   }, [email, password, navigation]);
 
@@ -100,8 +106,16 @@ const LoginScreen = () => {
         />
 
         {loginError !== '' && <Text style={styles.bigErrorMessage}>{loginError}</Text>}
-        <TouchableOpacity style={styles.button} onPress={(handleLogin)}>
-          <Text style={styles.buttonText}>Iniciar Sesión</Text>
+        <TouchableOpacity 
+          style={[styles.button, loading && { opacity: 0.5 }]} 
+          onPress={(handleLogin)}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator size="small" color="#fff"/>
+          ) : (
+            <Text style={styles.buttonText}>Iniciar Sesión</Text>
+          )}
         </TouchableOpacity>
 
         <View style={styles.footerContainer}>

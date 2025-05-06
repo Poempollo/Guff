@@ -32,7 +32,6 @@ const LoginForm =
                 placeholder="Correo Electrónico"
                 keyboardType="email-address"
                 autoCapitalize="none"
-                autoFocus
                 returnKeyType="next"
                 value={email}
                 onChangeText={onEmailChange}

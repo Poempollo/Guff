@@ -1,9 +1,12 @@
 # To do
 
-## [2025-05-02] - Alert en ForgotPasswordScreen - Javier
-- Comprobar las alertas al enviar un correo de recuperación en forgotPassword. Desde web no hay alertas, entonces no es posible comprobar su funcionamiento, solo aparecen en móviles.
+## [2025-05-06] - Ajustes - Javier
+- Comprobar que funciona el botón de cerrar sesión.
 
-## [2025-04-30] - Conexión con la API - Javier
-- Mejoras para el SignUp y Login, Loading State al hacer login para que aparezca un spinner, o deshabilitar el botón mientras se espera la respuesta.
+## [2025-05-06] - Navegación - Javier
+- Arreglar el sistema de navegación, centrarlo en un único componente (o con hijos) y dejar todo más claro.
+
+## [2025-05-06] - SplashScreen - Javier
+- Comprobar la pantalla del Splash Screen para seguir el vídeo, y así agregar animaciones al inicio de sesión.
 
 ## Nada por ahora 🕺💃

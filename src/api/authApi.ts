@@ -21,12 +21,12 @@ export const loginUser = async (email: string, password: string) => {
     
 }
 
-export const registerUser = async (name: string, email: string, username: string, password: string) => {
+export const registerUser = async (email: string, username: string, password: string) => {
     try {
         const response = await fetch('https://guff-api-production.up.railway.app/auth/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({ name, email, username, password }),
+            body: JSON.stringify({ email, username, password }),
         });
     
         if (!response.ok) {

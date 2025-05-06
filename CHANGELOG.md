@@ -1,9 +1,41 @@
 # Changelog
 
-### [v0.2.4] - 2025-05-06 - Raul
+### [v0.2.6] - 2025-05-06 - Raul
 #### Added
 - Añadido Chatbot con OpenRouter, que utiliza chatgpt3.
 - Añadido componentes nuevos, y sonidos.
+
+### [v0.2.5.4] - 2025-05-06 - Javier
+#### Improved
+- Añadida funcionalidad al botón de cerrar sesión em los ajustes.
+
+### [v0.2.5.3] - 2025-05-06 - Javier
+#### Improved
+- Mejorada la interfaz para los ajustes, y sus vistas legales, ya no aparece la barra fea en la parte superior.
+
+### [v0.2.5.2] - 2025-05-06 - Javier
+#### Added
+- Añadida la vista de Ajustes, con otras vistas legales. Simplemente front, aún no conecta con la api.
+
+### [v0.2.5.1] - 2025-05-06 - Javier
+#### Added
+- Preparado el funcionamiento de la splash screen personalizada.
+
+### [v0.2.5] - 2025-05-06 - Javier
+#### Added
+- Spinners en los botones de inicio de sesión, que deshabilitan al botón, y que terminan de cargar cuanfo finaliza el proceso. Sin problemas de rendimiento, discretos.
+#### Improved
+- Ahora, al abrir la aplicación, no se abre directamente el teclado, he eliminado los autofocus en todas las vistas.
+
+### [v0.2.4.1] - 2025-05-05 - Javier
+#### Added
+- Integrado otro campo en el signup, para que compruebe la contraseña que hemos puesto, el campo de repetir. Errores añadidos, sin fallos.
+
+### [v0.2.4] - 2025-05-05 - Javier
+#### Deleted
+- Cambios en el SignUp para evitar que guarde el campo nombre, ya que este no va a ser necesario. 
+=======
+
 
 ### [v0.2.3] - 2025-05-02 - Javier
 #### Added

@@ -10,12 +10,14 @@ import styles from '../../styles/LoginStyles';
 import { validateEmail } from '../../utils/useFormValidation';
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { forgotPassword } from '../../api/authApi';
+import { ActivityIndicator } from 'react-native';
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [serverError, setServerError] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const [fontsLoaded] = useFonts({
@@ -37,6 +39,8 @@ const ForgotPasswordScreen = () => {
       return;
     }
     
+    setLoading(true);
+    
     try {
       await forgotPassword(email);
       setServerError('');
@@ -46,6 +50,8 @@ const ForgotPasswordScreen = () => {
       const message = error?.message || 'Error al enviar el correo.'
       setServerError(message);
       return
+    } finally {
+      setLoading(false);
     }
   }, [email, navigation]);
 
@@ -73,8 +79,16 @@ const ForgotPasswordScreen = () => {
         />
 
         {serverError !== '' && <Text style={styles.bigErrorMessage}>{serverError}</Text>}
-        <TouchableOpacity style={styles.button} onPress={handleResetPassword}>
-          <Text style={styles.buttonText}>Enviar instrucciones</Text>
+        <TouchableOpacity 
+          style={[styles.button, loading && { opacity: 0.5 }]} 
+          onPress={handleResetPassword}
+          disabled={loading}
+          >
+            {loading ? (
+              <ActivityIndicator size="small" color="#fff"/>
+            ) : (
+              <Text style={styles.buttonText}>Enviar instrucciones</Text>
+            )}
         </TouchableOpacity>
 
         <View style={styles.footerContainer}>
