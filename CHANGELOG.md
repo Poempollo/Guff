@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.2.5.4] - 2025-05-06 - Javier
+#### Improved
+- Añadida funcionalidad al botón de cerrar sesión em los ajustes.
+
 ### [v0.2.5.3] - 2025-05-06 - Javier
 #### Improved
 - Mejorada la interfaz para los ajustes, y sus vistas legales, ya no aparece la barra fea en la parte superior.

@@ -8,9 +8,12 @@ import SettingItem from "../../components/SettingItem";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SettingsStackParamList } from "../../navigation/SettingsStackNavigator";
+import { RootStackParamList } from "../../../App";
+import { Alert } from "react-native";
 
 const SettingsScreen = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<SettingsStackParamList>>();
+  const settingsNav = useNavigation<NativeStackNavigationProp<SettingsStackParamList>>();
+  const rootNav = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   
   return (
     <ScrollView style={styles.container}>
@@ -21,7 +24,7 @@ const SettingsScreen = () => {
         </SettingSection>
 
         <SettingSection title="Region">
-        <SettingItem title="Spain" onPress={() => navigation.navigate("Region")} icon="earth-outline" />
+        <SettingItem title="Spain" onPress={() => settingsNav.navigate("Region")} icon="earth-outline" />
         </SettingSection>
 
         <SettingSection title="Acerca de">
@@ -30,14 +33,32 @@ const SettingsScreen = () => {
             icon="information-circle-outline"
             disabled
           />
-          <SettingItem title="Términos y condiciones" onPress={() => navigation.navigate("Terms")} />
-          <SettingItem title="Política de privacidad" onPress={() => navigation.navigate("Privacy")} />
+          <SettingItem title="Términos y condiciones" onPress={() => settingsNav.navigate("Terms")} />
+          <SettingItem title="Política de privacidad" onPress={() => settingsNav.navigate("Privacy")} />
         </SettingSection>
 
         <SettingSection title="Cuenta">
           <SettingItem
             title="Cerrar sesión"
-            onPress={() => {}}
+            onPress={() => {
+              Alert.alert(
+                "Cerrar sesión",
+                "¿Estás seguro de que quieres cerrar sesión?",
+                [
+                  {text: "Cancelar", style: "cancel"},
+                  {
+                    text: "Cerrar sesión",
+                    style: "destructive",
+                    onPress: () => {
+                      rootNav.reset({
+                        index: 0,
+                        routes: [{ name: "Login"}],
+                      });
+                    },
+                  },
+                ]
+              );
+            }}
             icon="log-out-outline"
             danger
           />

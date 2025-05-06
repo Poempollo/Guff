@@ -75,7 +75,4 @@ const SettingsStack = () => {
   );
 };
 
-//javier@prueba.es
-//Segura1234
-
 export default SettingsStack;
