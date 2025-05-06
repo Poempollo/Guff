@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.2.6.1] - 2025-05-06 - Raul
+#### Added
+- Corregidas clases ChatWindow, LoginScreen y FloatingChatBubble
+
 ### [v0.2.6] - 2025-05-06 - Raul
 #### Added
 - Añadido Chatbot con OpenRouter, que utiliza chatgpt3.

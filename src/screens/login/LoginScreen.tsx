@@ -1,5 +1,6 @@
+// src/screens/login/LoginScreen.tsx
 import React, { useCallback, useState } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Keyboard, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { useFonts } from 'expo-font';
 import { Montserrat_500Medium, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import { useNavigation } from '@react-navigation/native';
@@ -9,8 +10,6 @@ import LoginForm from './LoginForm';
 import styles from '../../styles/LoginStyles';
 import { validateEmail, validatePassword } from '../../utils/useFormValidation';
 import { loginUser } from '../../api/authApi';
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
-import { ActivityIndicator } from 'react-native';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -23,6 +22,7 @@ const LoginScreen = () => {
     email: '',
     password: '',
   });
+
   const [fontsLoaded] = useFonts({
     Montserrat_500Medium,
     Montserrat_700Bold,
@@ -33,21 +33,15 @@ const LoginScreen = () => {
   const handleEmailChange = (text: string) => {
     setEmail(text);
     if (loginFailed) setLoginFailed(false);
-    if (loginError) setLoginError('')
+    if (loginError) setLoginError('');
   };
 
   const handlePasswordChange = (text: string) => {
     setPassword(text);
     if (loginFailed) setLoginFailed(false);
-    if (loginError) setLoginError('')
+    if (loginError) setLoginError('');
   };
 
-  /**
-   * 
-   * Lógica de autenticación, aquí llamamos a la API.
-   * useCallback() guarda la función en memoria, y solo se re-renderiza
-   * si cambian email o password.
-   */
   const handleLogin = useCallback(async () => {
     setSubmitted(true);
 
@@ -56,7 +50,7 @@ const LoginScreen = () => {
     const newErrors = { email: emailError, password: passwordError };
     setErrors(newErrors);
 
-    if (emailError ||passwordError) return;
+    if (emailError || passwordError) return;
 
     setLoading(true);
 
@@ -64,7 +58,19 @@ const LoginScreen = () => {
       const data = await loginUser(email, password);
       console.log('Login correcto: ', data);
       setLoginError('');
-      navigation.navigate('Home');
+
+      // ✅ Resetear navegación y entrar directamente a Main > Home tab
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'Main',
+            state: {
+              routes: [{ name: 'Home' }],
+            },
+          },
+        ],
+      });
     } catch (error: any) {
       console.error('Error al iniciar sesión: ', error);
       if (error.message === 'No se pudo conectar con el servidor. Inténtelo de nuevo más tarde.') {
@@ -87,7 +93,7 @@ const LoginScreen = () => {
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Image
-            source={require('../.././../assets/logo.png')} // Ajusta la ruta según tu estructura
+            source={require('../.././../assets/logo.png')}
             style={styles.logo}
             resizeMode="contain"
           />
@@ -95,7 +101,7 @@ const LoginScreen = () => {
           <Text style={styles.subtitle}>Para nuestros mejores amigos peludos</Text>
         </View>
 
-        <LoginForm 
+        <LoginForm
           email={email}
           password={password}
           onEmailChange={handleEmailChange}
@@ -106,13 +112,14 @@ const LoginScreen = () => {
         />
 
         {loginError !== '' && <Text style={styles.bigErrorMessage}>{loginError}</Text>}
-        <TouchableOpacity 
-          style={[styles.button, loading && { opacity: 0.5 }]} 
-          onPress={(handleLogin)}
+
+        <TouchableOpacity
+          style={[styles.button, loading && { opacity: 0.5 }]}
+          onPress={handleLogin}
           disabled={loading}
         >
           {loading ? (
-            <ActivityIndicator size="small" color="#fff"/>
+            <ActivityIndicator size="small" color="#fff" />
           ) : (
             <Text style={styles.buttonText}>Iniciar Sesión</Text>
           )}

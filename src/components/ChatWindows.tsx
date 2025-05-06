@@ -14,10 +14,10 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
-import { Audio } from "expo-av";
+// **Reemplazo expo-av** por expo-audio
+import { Audio } from "expo-av"; 
 import { OPENROUTER_API_KEY } from "@env";
 
-// Lista de asistentes aleatorios
 const asistentes = [
   { nombre: "Ana Felipe", avatar: "https://i.pravatar.cc/300?img=1" },
   { nombre: "Ana Nerea", avatar: "https://i.pravatar.cc/300?img=2" },
@@ -42,24 +42,23 @@ const ChatWindow = () => {
   useEffect(() => {
     const aleatorio = asistentes[Math.floor(Math.random() * asistentes.length)];
     setAsistente(aleatorio);
-  
-    const mensajeBienvenida: Message = {
+
+    const bienvenida: Message = {
       role: "assistant",
       content: `¡Hola! Soy ${aleatorio.nombre} 😊 ¿En qué puedo ayudarte hoy?`,
     };
-  
+
     const timer = setTimeout(() => {
-      setMessages([mensajeBienvenida]);
-      playBotSound(); // ⬅️ Sonido al mostrar mensaje de bienvenida
+      setMessages([bienvenida]);
+      playBotSound();
     }, 3000);
-  
+
     return () => clearTimeout(timer);
   }, []);
 
-  // Sonido para respuesta del bot
   const playBotSound = async () => {
     const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/sounds/notification.mp3") // Asegúrate de que esta ruta exista
+      require("../../assets/sounds/notification.mp3")
     );
     await sound.playAsync();
   };
@@ -67,43 +66,51 @@ const ChatWindow = () => {
   const sendMessage = async () => {
     if (!input.trim()) return;
 
-    const userMessage: Message = { role: "user", content: input };
-    setMessages((prev) => [...prev, userMessage]);
+    const userMessage: Message = { role: "user", content: input.trim() };
+    // Construimos el array completo antes de setState
+    const allMessages = [...messages, userMessage];
+    setMessages(allMessages);
     setInput("");
     setLoading(true);
 
     try {
-      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      const resp = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-          "HTTP-Referer": "https://tuapp.com",
+          "Referer": "https://tuapp.com",
           "X-Title": "Guff Chatbot",
         },
         body: JSON.stringify({
           model: "openai/gpt-3.5-turbo",
           messages: [
             { role: "system", content: "Eres un asistente amigable que ayuda con dudas generales." },
-            ...messages,
-            userMessage,
+            ...allMessages,
           ],
         }),
       });
 
-      const data = await response.json();
-      const botMessage: Message = {
-        role: "assistant",
-        content: data.choices[0]?.message?.content ?? "Lo siento, no entendí eso.",
-      };
+      const data = await resp.json();
+      if (!resp.ok) {
+        throw new Error(data.message || "Error desconocido en OpenRouter");
+      }
+      const botContent = data.choices?.[0]?.message?.content ?? "Lo siento, no entendí eso.";
+      const botMessage: Message = { role: "assistant", content: botContent };
 
+      // Simulamos un “pensando” breve
       setTimeout(() => {
         setMessages((prev) => [...prev, botMessage]);
         flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
-        playBotSound(); // ⬅️ Reproducir sonido al recibir mensaje
+        playBotSound();
       }, 1000);
     } catch (err) {
       console.error("Error al consultar OpenRouter:", err);
+      const errorMsg: Message = {
+        role: "assistant",
+        content: "Lo siento, ha ocurrido un error al procesar tu mensaje.",
+      };
+      setMessages((prev) => [...prev, errorMsg]);
     } finally {
       setLoading(false);
     }
