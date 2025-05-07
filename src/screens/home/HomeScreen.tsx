@@ -7,6 +7,7 @@ import styles from "../../styles/HomeScreenStyles";
 import ChatWindow from "../../components/ChatWindows";
 import FloatingChatBubble from "../../components/FloatingChatBubble";
 
+/*
 const HomeScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [showChat, setShowChat] = useState(true);
@@ -42,3 +43,4 @@ const HomeScreen = () => {
 };
 
 export default React.memo(HomeScreen);
+*/

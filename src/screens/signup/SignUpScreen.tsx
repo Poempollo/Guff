@@ -18,6 +18,7 @@ import {
 import { registerUser } from "../../api/authApi";
 import { Keyboard, TouchableWithoutFeedback } from "react-native";
 import { ActivityIndicator } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SignUpScreen = () => {
   const [email, setEmail] = useState("");
@@ -85,8 +86,19 @@ const SignUpScreen = () => {
     setLoading(true);
 
     try {
-      await registerUser(email, username, password);
-      navigation.navigate("Home");
+      const data = await registerUser(email, username, password);
+      await AsyncStorage.setItem('token', data.token);
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'Main',
+            state: {
+              routes: [{ name: 'Home' }],
+            },
+          },
+        ],
+      });
     } catch (error: any) {
       console.error("Error al registrar: ", error);
 

@@ -10,6 +10,7 @@ import LoginForm from './LoginForm';
 import styles from '../../styles/LoginStyles';
 import { validateEmail, validatePassword } from '../../utils/useFormValidation';
 import { loginUser } from '../../api/authApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -59,7 +60,8 @@ const LoginScreen = () => {
       console.log('Login correcto: ', data);
       setLoginError('');
 
-      // ✅ Resetear navegación y entrar directamente a Main > Home tab
+      await AsyncStorage.setItem('token', data.access_token);
+      // Resetear navegación y entrar directamente a Main > Home tab
       navigation.reset({
         index: 0,
         routes: [

@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.3.1.1] - 2025-05-07 - Javier
+#### Fixed
+- Arreglado el manejo de token para su uso continuo correctamente durante la interacción con la aplicación.
+
 ## Minor Update
 ### [v0.3] - 2025-05-07 - Javier
 #### Added

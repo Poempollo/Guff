@@ -12,11 +12,21 @@ import { RootStackParamList } from "../../../App";
 import { Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { deleteAccount } from "../../api/authApi";
+import { getToken } from "../../api/authApi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SettingsScreen = () => {
   const settingsNav = useNavigation<NativeStackNavigationProp<SettingsStackParamList>>();
   const rootNav = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [token, setToken] = React.useState<string | null>(null);
+  
+  React.useEffect(() => {
+    const fetchToken = async () => {
+      const storedToken = await getToken();
+      setToken(storedToken)
+    };
+    fetchToken();
+  }, []);
 
   const handleDeleteAccount = async () => {
     if (!token) {
@@ -35,6 +45,7 @@ const SettingsScreen = () => {
           onPress: async () => {
             try {
               await deleteAccount(token);
+              await AsyncStorage.removeItem("authToken");
               rootNav.reset({
                 index: 0,
                 routes: [{ name: "Login" }],
@@ -85,6 +96,7 @@ const SettingsScreen = () => {
                       text: "Cerrar sesión",
                       style: "destructive",
                       onPress: () => {
+                        AsyncStorage.removeItem("authToken");
                         rootNav.reset({
                           index: 0,
                           routes: [{ name: "Login"}],
@@ -99,7 +111,7 @@ const SettingsScreen = () => {
             />
             <SettingItem
               title="Eliminar Cuenta"
-              onPress={() => {handleDeleteAccount}}
+              onPress={handleDeleteAccount}
               icon="person-remove-outline"
               danger
             />
