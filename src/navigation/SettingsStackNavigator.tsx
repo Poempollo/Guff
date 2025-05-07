@@ -58,9 +58,9 @@ const SettingsStack = () => {
           headerTitle: '',
           headerBackVisible: false,
           headerShadowVisible: false,
-          headerStyle: {
-            backgroundColor: colors.background,
-          },
+          //headerStyle: {
+          //  backgroundColor: colors.background,
+          //},
           headerLeft: () => (
             <Ionicons
               name="chevron-back"

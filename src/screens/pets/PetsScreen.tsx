@@ -1,4 +1,3 @@
-// screens/ProfileScreen.tsx
 import React from 'react';
 import { View, Text } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
@@ -8,8 +7,8 @@ const ProfileScreen = () => {
   return (
     <View style={styles.container}>
       <Animated.View entering={FadeIn.duration(600)} style={styles.content}>
-        <Text style={styles.title}>Mi Perfil</Text>
-        <Text style={styles.subtitle}>Aquí puedes ver y editar tu información personal.</Text>
+        <Text style={styles.title}>Mascotas</Text>
+        <Text style={styles.subtitle}>Vista principal, raúl aquí metes tu clase</Text>
       </Animated.View>
     </View>
   );

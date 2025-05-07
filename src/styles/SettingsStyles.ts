@@ -2,11 +2,16 @@ import { StyleSheet } from "react-native";
 import { colors } from "./theme";
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.background,
     paddingHorizontal: 20,
     paddingTop: 30,
+    marginBottom: -15,
   },
   content: {
     paddingBottom: 40,
@@ -15,9 +20,9 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   sectionTitle: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#888",
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#666",
     marginBottom: 10,
   },
   item: {
@@ -36,7 +41,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   itemTitle: {
-    fontSize: 16,
+    fontSize: 18,
   },
   itemDisabled: {
     opacity: 0.5,

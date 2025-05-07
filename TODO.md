@@ -1,8 +1,5 @@
 # To do
 
-## [2025-05-06] - Ajustes - Javier
-- Comprobar que funciona el botón de cerrar sesión.
-
 ## [2025-05-06] - Navegación - Javier
 - Arreglar el sistema de navegación, centrarlo en un único componente (o con hijos) y dejar todo más claro.
 

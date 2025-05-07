@@ -63,3 +63,25 @@ export const forgotPassword = async (email: string) => {
         throw error;
     }
 }
+
+export const deleteAccount = async (token: string) => {
+    try {
+        const response = await fetch('https://guff-api-production.up.railway.app/auth/delete-account', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+        }
+    } catch (error:any) {
+        if (error instanceof TypeError) {
+            throw new Error('No se pudo conectar con el servidor. Inténtelo de nuevo más tarde.')
+        }
+
+        throw error;
+    }
+}

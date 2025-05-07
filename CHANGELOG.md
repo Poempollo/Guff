@@ -1,8 +1,16 @@
 # Changelog
 
-### [v0.2.6.1] - 2025-05-06 - Raul
+## Minor Update
+### [v0.3] - 2025-05-07 - Javier
 #### Added
-- Corregidas clases ChatWindow, LoginScreen y FloatingChatBubble
+- Añadida la vista real de la aplicación, con todas las secciones reales, home/mascotas, marketplace, chatbot y ajustes.
+- Añadida la funcionalidad para eliminar la cuenta desde los ajustes.
+#### Improved
+- Mejorada la UI en los ajustes, el bottomtabsnavigator y los iconos.
+
+### [v0.2.6.1] - 2025-05-06 - Raul
+#### Fixed
+- Corregidas clases ChatWindow, LoginScreen y FloatingChatBubble.
 
 ### [v0.2.6] - 2025-05-06 - Raul
 #### Added
@@ -38,7 +46,6 @@
 ### [v0.2.4] - 2025-05-05 - Javier
 #### Deleted
 - Cambios en el SignUp para evitar que guarde el campo nombre, ya que este no va a ser necesario. 
-=======
 
 
 ### [v0.2.3] - 2025-05-02 - Javier
