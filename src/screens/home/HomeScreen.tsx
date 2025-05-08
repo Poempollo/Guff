@@ -1,44 +1,87 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../../App";
-import styles from "../../styles/HomeScreenStyles";
-import ChatWindow from "../../components/ChatWindows";
-import FloatingChatBubble from "../../components/FloatingChatBubble";
+import React, { useState } from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import { Header } from '../../components/Header';
+import { PetCarousel } from '../../components/PetCarousel';
+import { AddPetModal } from '../../components/AddPetModal';
+import { VaccineBanner } from '../../components/VaccineBanner';
+import { MedicationList } from '../../components/MedicationList';
+import { ChatWidget } from '../../components/ChatWidget';
+import { usePets } from '../../hooks/usePets';
+import defaultBreedImages from '../../constants/defaultBreedImages';
+import styles from '../../styles/HomeScreenStyles';
+import { Vaccine, Medication } from '../../types';
 
-const HomeScreen = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const [showChat, setShowChat] = useState(true);
+const HomeScreen: React.FC = () => {
+  const { pets, addPet, deletePet, error } = usePets();
+  const [modalVisible, setModalVisible] = useState(false);
+
+  if (error) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.errorText}>Error cargando datos.</Text>
+      </SafeAreaView>
+    );
+  }
+
+  const nextVaccine: Vaccine = {
+    name: 'Rabia',
+    date: '2024-03-15',
+    daysLeft: 31,
+  };
+
+  const medications: Medication[] = [
+    { name: 'Antiparasitario', frequency: 'Cada 3 meses', nextDose: '2024-02-28' },
+    { name: 'Vitaminas B12', frequency: 'Diario', nextDose: '2024-02-13' },
+  ];
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.logo}>🐾</Text>
-        <Text style={styles.title}>Guff</Text>
-        <Text style={styles.subtitle}>¡Bienvenido de nuevo!</Text>
-      </View>
+    <SafeAreaView style={styles.container}>
+      <AddPetModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onSave={addPet}
+      />
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Profile")}
-        >
-          <Text style={styles.buttonText}>Ir a Perfil</Text>
-        </TouchableOpacity>
+      <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
+        <Header />
 
-        <TouchableOpacity
-          style={styles.buttonSecondary}
-          onPress={() => navigation.navigate("Settings")}
-        >
-          <Text style={styles.buttonSecondaryText}>Configuración</Text>
-        </TouchableOpacity>
-      </View>
+        {pets.length === 0 ? (
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyText}>
+              Aún no has registrado ninguna mascota 🐾
+            </Text>
+            <TouchableOpacity
+              style={styles.saveButton}
+              onPress={() => setModalVisible(true)}
+            >
+              <Text style={styles.saveButtonText}>
+                Agregar mi primera mascota
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <PetCarousel
+            pets={pets}
+            onDelete={deletePet}
+            onAdd={() => setModalVisible(true)}
+          />
+        )}
 
-      {showChat && <ChatWindow />}
-      <FloatingChatBubble onPress={() => setShowChat(!showChat)} />
-    </View>
+        {pets.length > 0 && <VaccineBanner nextVaccine={nextVaccine} />}
+
+        <Text style={styles.sectionTitle}>Medicamentos Actuales</Text>
+        <MedicationList medications={medications} />
+      </ScrollView>
+
+      <ChatWidget visible={false} />
+    </SafeAreaView>
   );
 };
 
-export default React.memo(HomeScreen);
+export default HomeScreen;

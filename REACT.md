@@ -33,6 +33,8 @@ Otras carpetas importantes:
 - `.expo/`: configuraciones internas de Expo.
 - `App.tsx`: punto de entrada de la app, donde se monta la navegación principal.
 - `index.ts`: entrada raíz que llama a `registerRootComponent`.
+- `/constants`: Agrupa y centraliza todos aquellos valores estáticos que luego se consumen en distintos componentes o pantallas de la aplicación.
+- `/hooks`: Agrupa la lógica de estado y de efectos que se quieren reutilizar entre componentes.
 
 Archivos importantes:
 - `package.json`: dependencias del proyecto.

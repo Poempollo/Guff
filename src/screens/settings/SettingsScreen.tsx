@@ -1,4 +1,3 @@
-// screens/SettingsScreen.tsx
 import React from "react";
 import { ScrollView } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";

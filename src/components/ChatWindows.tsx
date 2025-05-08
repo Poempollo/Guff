@@ -14,8 +14,7 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
-// **Reemplazo expo-av** por expo-audio
-import { Audio } from "expo-av"; 
+import { Audio } from "expo-av";
 import { OPENROUTER_API_KEY } from "@env";
 
 const asistentes = [
@@ -51,23 +50,26 @@ const ChatWindow = () => {
     const timer = setTimeout(() => {
       setMessages([bienvenida]);
       playBotSound();
-    }, 3000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
 
   const playBotSound = async () => {
-    const { sound } = await Audio.Sound.createAsync(
-      require("../../assets/sounds/notification.mp3")
-    );
-    await sound.playAsync();
+    try {
+      const { sound } = await Audio.Sound.createAsync(
+        require("../../assets/sounds/notification.mp3")
+      );
+      await sound.playAsync();
+    } catch (error) {
+      console.error("Error al reproducir sonido:", error);
+    }
   };
 
   const sendMessage = async () => {
     if (!input.trim()) return;
 
     const userMessage: Message = { role: "user", content: input.trim() };
-    // Construimos el array completo antes de setState
     const allMessages = [...messages, userMessage];
     setMessages(allMessages);
     setInput("");
@@ -79,7 +81,7 @@ const ChatWindow = () => {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-          "Referer": "https://tuapp.com",
+          Referer: "https://tuapp.com",
           "X-Title": "Guff Chatbot",
         },
         body: JSON.stringify({
@@ -95,23 +97,23 @@ const ChatWindow = () => {
       if (!resp.ok) {
         throw new Error(data.message || "Error desconocido en OpenRouter");
       }
+
       const botContent = data.choices?.[0]?.message?.content ?? "Lo siento, no entendí eso.";
       const botMessage: Message = { role: "assistant", content: botContent };
 
-      // Simulamos un “pensando” breve
       setTimeout(() => {
         setMessages((prev) => [...prev, botMessage]);
         flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
         playBotSound();
+        setLoading(false);
       }, 1000);
     } catch (err) {
-      console.error("Error al consultar OpenRouter:", err);
+      console.error("Error al procesar el mensaje:", err);
       const errorMsg: Message = {
         role: "assistant",
         content: "Lo siento, ha ocurrido un error al procesar tu mensaje.",
       };
       setMessages((prev) => [...prev, errorMsg]);
-    } finally {
       setLoading(false);
     }
   };
@@ -127,9 +129,9 @@ const ChatWindow = () => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : undefined}
-      style={[styles.container, { bottom: insets.bottom + 160 }]}
+      style={[styles.container, { paddingBottom: insets.bottom }]}
     >
-      <LinearGradient colors={["#0072ff", "#00c6ff"]} style={styles.header}>
+      <LinearGradient colors={["#0072ff", "#00c6ff"]} style={[styles.header, { paddingTop: insets.top + 10}]}>
         <View style={styles.avatarRow}>
           {asistente && (
             <>
@@ -179,18 +181,8 @@ const ChatWindow = () => {
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
-    right: 20,
-    width: 360,
-    height: 480,
+    flex: 1,
     backgroundColor: "#fff",
-    borderRadius: 20,
-    shadowColor: "#000",
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 20,
-    overflow: "hidden",
   },
   header: {
     padding: 15,

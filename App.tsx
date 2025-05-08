@@ -1,8 +1,8 @@
-// App.tsx
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+
 
 import LoginScreen from "./src/screens/login/LoginScreen";
 import BottomTabsNavigator from "./src/navigation/BottomTabsNavigator";

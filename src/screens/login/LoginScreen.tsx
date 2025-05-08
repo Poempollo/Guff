@@ -1,4 +1,3 @@
-// src/screens/login/LoginScreen.tsx
 import React, { useCallback, useState } from 'react';
 import { Text, View, TouchableOpacity, Image, Keyboard, TouchableWithoutFeedback, ActivityIndicator } from 'react-native';
 import { useFonts } from 'expo-font';
