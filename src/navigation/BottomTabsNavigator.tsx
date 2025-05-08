@@ -1,8 +1,5 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../screens/home/HomeScreen";
-import ProfileScreen from "../screens/pets/PetsScreen";
-import SettingsScreen from "../screens/settings/SettingsScreen";
 import ChatbotScreen from "../screens/chatbot/ChatbotScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../styles/theme";

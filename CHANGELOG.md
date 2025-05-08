@@ -1,5 +1,10 @@
 # Changelog
 
+### [v0.4.2] - 2025-05-09 - javier
+#### Added
+- Creada una rama para añadir todas las funcionalidades.
+- El chatbot añadido correctamente a sus respectivas clases, falla la conexión con la API, y el trabajo de esta última, revisar. Chatbot recuperado para la aplicación.
+
 ### [v0.4.1] - 2025-05-09 - javier
 #### Added
 - Preparación para el merge de la rama feature/chatbot-ui-home-redesign hacia la rama main. Archivos de configuración y externos al código modificados.
