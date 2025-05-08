@@ -1,5 +1,29 @@
 # Changelog
 
+### [v0.4.1] - 2025-05-09 - javier
+#### Added
+- Preparación para el merge de la rama feature/chatbot-ui-home-redesign hacia la rama main. Archivos de configuración y externos al código modificados.
+
+## Minor Update
+### [v0.4] - 2025-05-08 - Raul
+#### Added
+- Se ha dividido el proyecto en algunas carpetas con sus respectivos nombres, para mejor manejo, reutilización etc.
+- Añadidas carpetas constants, hooks.
+- Añadido archivo type.js que es un archivo donde se definen las interfaces de TypeScript.
+- En la carpeta /constants hemos creado un archivo donde se van a definir un diccionario que va a ir por nombre, el cual cada nombre contiene una imagen que va a ser la que le corresponde.
+- En la carpeta /hooks la cual se ha creado para la reutilizacion de funciones que encapsulan la lógica.
+- Dentro de esta carpeta se ha creado un archivo usePets.ts que nos indica los estados de las mascotas.
+- En la carpeta /components se han añadido más clases para la reutilización del proyecto
+- Se ha eliminado el botón flotante de ChatBot.
+- Se ha implementado un botón con nombre "IA" dentro de BottomTabsNavigator, nos permite acceder al ChatBot de manera independiente.
+- Se ha ajustado el tamaño de la ventana de ChatBot, tenia un tamaño tan grande que el contenido de la parte superior no era visible.
+- Se ha implementado animaciones en el botón "IA" simulando el de Apple Intelligence.
+- Se ha ajustado el HomeScreen.tsx para que sea mucho más reutilizable y con mejor manejo de errores.
+- Se ha implementado PetCard para poder agregar las mascotas y una ventana para rellenar sus datos.
+- Se ha añadido contenido para mostrar de "Próxima Vacuna" y las "Medicamentos Actuales".
+- Se ha ajustado PetCard, ya que estaba muy pegado a "Próxima Vacuna".
+- Se ha añadido logo al iniciar aplicación, en app.json.
+
 ### [v0.3.1.1] - 2025-05-07 - Javier
 #### Fixed
 - Arreglado el manejo de token para su uso continuo correctamente durante la interacción con la aplicación.
