@@ -1,5 +1,12 @@
 # Changelog
 
+### [v0.4.3] - 2025-05-11 - javier
+#### Added
+- Añadida la funcionalidad del splash screen, una animación que se muestra al iniciar la aplicación.
+
+#### Improved
+- Mejorada la respuesta y envío a la api para el chatbot, ahora utiliza fetch en lugar de axios.
+
 ### [v0.4.2] - 2025-05-09 - javier
 #### Added
 - Creada una rama para añadir todas las funcionalidades.

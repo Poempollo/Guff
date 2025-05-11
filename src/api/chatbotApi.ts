@@ -1,13 +1,22 @@
-import axios from 'axios';
-
-const BASE_URL = process.env.EXPO_PUBLIC_API_URL || "https://guff-api-production.up.railway.app";
-
 export const sendMessageToBot = async (messages: { role: string; content: string }[]) => {
   try {
-    const res = await axios.post(`${BASE_URL}/chatbot`, { messages });
-    return res.data;
+    const response = await fetch(`https://guff-api-production.up.railway.app/chatbot`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.detail || 'Error al contactar con el bot');
+    }
+
+    const data = await response.json();
+    return data;
   } catch (error: any) {
-    console.error("Error al enviar mensaje al bot:", error?.response?.data || error.message);
-    throw new Error("No se pudo contactar con el bot");
+    if (error instanceof TypeError) {
+      throw new Error('No se pudo conectar con el servidor. Inténtelo de nuevo más tarde.');
+    }
+    throw error;
   }
 };
