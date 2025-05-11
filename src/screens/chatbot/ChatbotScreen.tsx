@@ -1,17 +1,21 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
-import styles from '../../styles/ProfileStyles';
+// src/screens/chatbot/ChatbotScreen.tsx
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import ChatWidget from "../../components/chatbot/ChatWidget";
 
-const ProfileScreen = () => {
+const ChatbotScreen = () => {
   return (
-    <View style={styles.container}>
-      <Animated.View entering={FadeIn.duration(600)} style={styles.content}>
-        <Text style={styles.title}>Chatbot</Text>
-        <Text style={styles.subtitle}>Aquí va la IA</Text>
-      </Animated.View>
+    <View style={styles.screen}>
+      <ChatWidget />
     </View>
   );
 };
 
-export default React.memo(ProfileScreen);
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: "#FFF",
+  },
+});
+
+export default ChatbotScreen;
