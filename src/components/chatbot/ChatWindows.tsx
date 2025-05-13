@@ -14,13 +14,14 @@ import { ChatMessage } from "../../services/chatbotService";
 import { Audio } from "expo-av";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
+import { avatars } from "../../../assets/avatars/Assistants";
 
 const asistentes = [
-  { nombre: "Ana Felipe", avatar: require("../../../assets/avatars/AnaFelipe.png")},
-  { nombre: "Ana Nerea", avatar: "https://i.pravatar.cc/300?img=2" },
-  { nombre: "Raul", avatar: require("../../../assets/avatars/Raul.png")},
-  { nombre: "Javier", avatar: require("../../../assets/avatars/Javi.png")},
-  { nombre: "Lucas", avatar: require("../../../assets/avatars/Lucas.png")},
+  { nombre: "Ana Felipe", avatar: avatars.anaFelipe},
+  { nombre: "Ana Nerea", avatar: avatars.anaNerea},,
+  { nombre: "Raul", avatar: avatars.raul},
+  { nombre: "Javier", avatar: avatars.javier},
+  { nombre: "Lucas", avatar: avatars.lucas},
 ];
 
 const ChatWindow = () => {
