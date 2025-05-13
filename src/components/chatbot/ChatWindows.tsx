@@ -16,11 +16,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 
 const asistentes = [
-  { nombre: "Ana Felipe", avatar: "https://i.pravatar.cc/300?img=1" },
+  { nombre: "Ana Felipe", avatar: require("../../../assets/avatars/AnaFelipe.png")},
   { nombre: "Ana Nerea", avatar: "https://i.pravatar.cc/300?img=2" },
-  { nombre: "Raul", avatar: "https://i.pravatar.cc/300?img=3" },
-  { nombre: "Javier", avatar: "https://i.pravatar.cc/300?img=4" },
-  { nombre: "Lucas", avatar: "https://i.pravatar.cc/300?img=5" },
+  { nombre: "Raul", avatar: require("../../../assets/avatars/Raul.png")},
+  { nombre: "Javier", avatar: require("../../../assets/avatars/Javi.png")},
+  { nombre: "Lucas", avatar: require("../../../assets/avatars/Lucas.png")},
 ];
 
 const ChatWindow = () => {
@@ -96,7 +96,7 @@ const ChatWindow = () => {
         {asistente && (
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image
-              source={{ uri: asistente.avatar }}
+              source={asistente.avatar}
               style={{ width: 40, height: 40, borderRadius: 20, marginRight: 10 }}
             />
             <View>
