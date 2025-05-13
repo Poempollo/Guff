@@ -1,4 +1,3 @@
-// src/screens/chatbot/ChatbotScreen.tsx
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import ChatWidget from "../../components/chatbot/ChatWidget";
@@ -6,7 +5,7 @@ import ChatWidget from "../../components/chatbot/ChatWidget";
 const ChatbotScreen = () => {
   return (
     <View style={styles.screen}>
-      <ChatWidget />
+      <ChatWidget visible={true} />
     </View>
   );
 };
