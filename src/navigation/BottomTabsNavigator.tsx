@@ -6,6 +6,7 @@ import { colors } from "../styles/theme";
 import SettingsStack from "./SettingsStackNavigator";
 import PetsScreen from "../screens/pets/PetsScreen";
 import MarketScreen from "../screens/market/MarketScreen";
+import Animated, { useAnimatedStyle, withSpring } from "react-native-reanimated";
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +15,7 @@ const BottomTabsNavigator = () => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarShowLabel: false,
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({ focused, color }) => {
           let iconName: keyof typeof Ionicons.glyphMap = "home";
 
           if (route.name === "Home") {
@@ -27,9 +28,24 @@ const BottomTabsNavigator = () => {
             iconName = focused ? "chatbox" : "chatbox-outline";
           }
 
-          const animatedSize = focused ? 28 : 24;
+          const animatedStyle = useAnimatedStyle(() => {
+            return {
+              transform: [
+                {
+                  scale: withSpring(focused ? 1.3 : 1, {
+                    damping: 8,
+                    stiffness: 120,
+                  }),
+                },
+              ],
+            };
+          }, [focused]);
 
-          return <Ionicons name={iconName} size={animatedSize} color={color} />;
+          return (
+            <Animated.View style={animatedStyle}>
+              <Ionicons name={iconName} size={24} color={color} />
+            </Animated.View>
+          );
         },
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: "gray",
@@ -45,16 +61,13 @@ const BottomTabsNavigator = () => {
           elevation: 5,
           paddingBottom: 10,
           paddingTop: 15,
-          bottom: 0,
-          left: 0,
-          right: 0,
         },
         headerShown: false,
       })}
     >
       <Tab.Screen name="Home" component={PetsScreen} />
       <Tab.Screen name="Market" component={MarketScreen} />
-      <Tab.Screen name="Chatbot" component={ChatbotScreen}/>
+      <Tab.Screen name="Chatbot" component={ChatbotScreen} />
       <Tab.Screen name="Settings" component={SettingsStack} />
     </Tab.Navigator>
   );

@@ -1,83 +1,122 @@
-// src/components/chatbot/ChatWindow.tsx
-import React, { useState, useRef } from "react";
-import { View, Text, TextInput, TouchableOpacity, ScrollView, ActivityIndicator } from "react-native";
-import { sendMessageToChatbot, ChatMessage } from "../../services/chatbotService";
-import { sendMessageToBot } from "../../api/chatbotApi";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  ActivityIndicator,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+  TouchableWithoutFeedback,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useChatbot } from "../../hooks/useChatBot";
+import { Ionicons } from "@expo/vector-icons";
+import { chatWindowStyles, getHeaderStyle, getMessageBubbleStyle, getMessageTextStyle } from "../../styles/ChatWindowStyles";
+import { colors } from "../../styles/theme";
 
 const ChatWindow = () => {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const scrollViewRef = useRef<ScrollView>(null);
+  const {
+    messages,
+    input,
+    setInput,
+    loading,
+    asistente,
+    handleSend,
+    scrollViewRef,
+  } = useChatbot();
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+  const insets = useSafeAreaInsets();
 
-    const newUserMessage: ChatMessage = { role: "user", content: input };
-    const updatedMessages = [...messages, newUserMessage];
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
 
-    setMessages(updatedMessages);
-    setInput("");
-    setLoading(true);
-
-    try {
-      const response = await sendMessageToBot(updatedMessages);
-      const assistantReply = response.content ?? "Lo siento, no entendí eso.";
-
-      setMessages([...updatedMessages, { role: "assistant", content: assistantReply }]);
-    } catch (err) {
-      setMessages([...updatedMessages, { role: "assistant", content: "Error al contactar con el asistente 😕" }]);
-    } finally {
-      setLoading(false);
-      setTimeout(() => scrollViewRef.current?.scrollToEnd({ animated: true }), 100);
-    }
-  };
+  useEffect(() => {
+    const showSub = Keyboard.addListener("keyboardDidShow", () => setKeyboardVisible(true));
+    const hideSub = Keyboard.addListener("keyboardDidHide", () => setKeyboardVisible(false));
+    return () => {
+      showSub.remove();
+      hideSub.remove();
+    };
+  }, []);
 
   return (
-    <View style={{ flex: 1, padding: 16 }}>
-      <ScrollView
-        ref={scrollViewRef}
-        style={{ flex: 1 }}
-        contentContainerStyle={{ paddingBottom: 60 }}
-      >
-        {messages.map((msg, index) => (
-          <Text
-            key={index}
-            style={{
-              alignSelf: msg.role === "user" ? "flex-end" : "flex-start",
-              backgroundColor: msg.role === "user" ? "#DCF8C6" : "#EEE",
-              borderRadius: 12,
-              padding: 10,
-              marginVertical: 4,
-              maxWidth: "80%",
+    <KeyboardAvoidingView
+      style={chatWindowStyles.container}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={chatWindowStyles.innerContainer}>
+          {/* Header */}
+          <View style={getHeaderStyle(insets.top)}>
+            {asistente && (
+              <View style={chatWindowStyles.headerContent}>
+                <View style={chatWindowStyles.avatarContainer}>
+                  <Image
+                    source={asistente.avatar} // Falla, pero muestra las imágenes, no es necesario solucionar.
+                    style={chatWindowStyles.avatar}
+                  />
+                  <View style={chatWindowStyles.statusDot} />
+                </View>
+                <View>
+                  <Text style={chatWindowStyles.nameText}>
+                    {asistente.nombre}
+                  </Text>
+                  <Text style={chatWindowStyles.subtitleText}>
+                    Disponible para ayudarte
+                  </Text>
+                </View>
+              </View>
+            )}
+          </View>
+
+          {/* Mensajes */}
+          <ScrollView
+            ref={scrollViewRef}
+            style={{ flex: 1 }}
+            contentContainerStyle={{ paddingVertical: 10 }}
+            onContentSizeChange={() => {
+              if (!keyboardVisible) {
+                scrollViewRef.current?.scrollToEnd({ animated: true });
+              }
             }}
           >
-            {msg.content}
-          </Text>
-        ))}
-        {loading && <ActivityIndicator size="small" color="#999" />}
-      </ScrollView>
+            {messages.map((msg, index) => (
+              <View key={index} style={getMessageBubbleStyle(msg.role === "user")}>
+                <Text style={getMessageTextStyle(msg.role === "user")}>
+                  {msg.content}
+                </Text>
+              </View>
+            ))}
 
-      <View style={{ position: "absolute", bottom: 10, left: 10, right: 10, flexDirection: "row" }}>
-        <TextInput
-          value={input}
-          onChangeText={setInput}
-          placeholder="Escribe algo..."
-          style={{
-            flex: 1,
-            backgroundColor: "#FFF",
-            borderRadius: 20,
-            paddingHorizontal: 12,
-            height: 40,
-            borderWidth: 1,
-            borderColor: "#CCC",
-          }}
-        />
-        <TouchableOpacity onPress={handleSend} style={{ marginLeft: 8, justifyContent: "center" }}>
-          <Text style={{ color: "#007AFF", fontWeight: "bold" }}>Enviar</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+            {loading && (
+              <ActivityIndicator
+                size="small"
+                color={colors.primary}
+                style={{ marginVertical: 10 }}
+              />
+            )}
+          </ScrollView>
+
+          {/* Input */}
+          <View style={chatWindowStyles.inputContainer}>
+            <TextInput
+              value={input}
+              onChangeText={setInput}
+              placeholder="Escribe un mensaje..."
+              placeholderTextColor="#999"
+              style={chatWindowStyles.input}
+            />
+            <TouchableOpacity onPress={handleSend} style={chatWindowStyles.sendButton}>
+              <Ionicons name="send" size={24} color={colors.primary} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 

@@ -1,5 +1,18 @@
 # Changelog
 
+### [v0.5.1] - 2025-05-15 - Javier
+#### Improved
+- Mejorado el scroll en el chatbot, ahora scrollea siempre, no sólo cuando está el teclado abierto. Aún así a veces tarda un poco en reaccionar.
+- Movida los estilos del chatbot a un archivo propio para mejorar la legibilidad y mantenimiento del código.
+#### Fixed
+- Arreglados algunos problemas con los imports de algunas clases del chatbot.
+
+### [v0.5] - 2025-05-13 - Raul
+#### Added
+- Mejoras de rendimiento y división del projecto en carpetas.
+- Manejo de errores mucha mas eficiente.
+- Mejor estructuración de Añadir Mascotas.
+
 ### [v0.4.3] - 2025-05-11 - javier
 #### Added
 - Añadida la funcionalidad del splash screen, una animación que se muestra al iniciar la aplicación.
