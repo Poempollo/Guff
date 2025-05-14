@@ -7,22 +7,21 @@ import { PetCard } from '../Card/PetCard';
 
 interface PetCarouselProps {
   pets: Pet[];
-  onDelete: (index: number) => void;
   onAdd: () => void;
 }
 
-export const PetCarousel: React.FC<PetCarouselProps> = ({ pets, onDelete, onAdd }) => {
+export const PetCarousel: React.FC<PetCarouselProps> = ({ pets, onAdd }) => {
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.carouselContainer}
-      snapToInterval={275} // 260 card width + 15 marginRight
+      snapToInterval={275}
       decelerationRate="fast"
       snapToAlignment="start"
     >
       {pets.map((pet, index) => (
-        <PetCard key={index} pet={pet} index={index} onDelete={onDelete} />
+        <PetCard key={pet.id} pet={pet} index={index} />
       ))}
 
       <TouchableOpacity onPress={onAdd} style={styles.addPetButton}>

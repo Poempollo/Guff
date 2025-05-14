@@ -4,14 +4,14 @@ import ChatWidget from "../../components/chatbot/ChatWidget";
 
 const ChatbotScreen = () => {
   return (
-    <View style={styles.screen}>
-      <ChatWidget visible={true} />
+    <View style={styles.container}>
+      <ChatWidget />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
+  container: {
     flex: 1,
     backgroundColor: "#FFF",
   },
