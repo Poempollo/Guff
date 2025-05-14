@@ -2,8 +2,9 @@ export interface Pet {
   id: string;
   name: string;
   breed: string;
-  age: string;
+  age: number | null;
   gender: string;
+  weight: number | null;
   image: string;
 }
 export interface Vaccine {

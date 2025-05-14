@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Modal,
   View,
@@ -7,26 +7,30 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
-} from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import styles from '../../styles/HomeScreenStyles';
-import defaultBreedImages from '../../constants/defaultBreedImage';
-import { Pet } from '../../types';
-import { usePetContext } from '../../context/PetContext';
+} from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import styles from "../../styles/HomeScreenStyles";
+import defaultBreedImages from "../../constants/defaultBreedImage";
+import { Pet } from "../../types";
+import { usePetContext } from "../../context/PetContext";
 
 interface AddPetModalProps {
   visible: boolean;
   onClose: () => void;
 }
 
-export const AddPetModal: React.FC<AddPetModalProps> = ({ visible, onClose }) => {
+export const AddPetModal: React.FC<AddPetModalProps> = ({
+  visible,
+  onClose,
+}) => {
   const { addPet } = usePetContext();
-  const [pet, setPet] = useState<Omit<Pet, 'id'>>({
-    name: '',
-    breed: '',
-    age: '',
-    gender: '',
-    image: '',
+  const [pet, setPet] = useState<Omit<Pet, "id">>({
+    name: "",
+    breed: "",
+    age: null,
+    gender: "",
+    weight: null,
+    image: "",
   });
 
   const pickImage = async () => {
@@ -38,12 +42,13 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({ visible, onClose }) =>
     });
 
     if (!result.canceled && result.assets.length) {
-      setPet(prev => ({ ...prev, image: result.assets[0].uri }));
+      setPet((prev) => ({ ...prev, image: result.assets[0].uri }));
     }
   };
 
   const handleSave = () => {
-    const imageUri = pet.image || defaultBreedImages[pet.breed] || defaultBreedImages.default;
+    const imageUri =
+      pet.image || defaultBreedImages[pet.breed] || defaultBreedImages.default;
     const newPet: Pet = {
       ...pet,
       id: Date.now().toString(),
@@ -51,14 +56,14 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({ visible, onClose }) =>
     };
 
     addPet(newPet);
-    setPet({ name: '', breed: '', age: '', gender: '', image: '' });
+    setPet({ name: "", breed: "", age: 0, gender: "", weight: 0, image: "" });
     onClose();
   };
 
   return (
     <Modal visible={visible} transparent animationType="slide">
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={styles.modalOverlay}
       >
         <View style={styles.modalContent}>
@@ -67,40 +72,62 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({ visible, onClose }) =>
           <TextInput
             placeholder="Nombre"
             value={pet.name}
-            onChangeText={text => setPet(s => ({ ...s, name: text }))}
+            onChangeText={(text) => setPet((s) => ({ ...s, name: text }))}
             style={styles.input}
           />
 
           <TextInput
             placeholder="Raza"
             value={pet.breed}
-            onChangeText={text => setPet(s => ({ ...s, breed: text }))}
+            onChangeText={(text) => setPet((s) => ({ ...s, breed: text }))}
             style={styles.input}
           />
 
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
             <TextInput
               placeholder="Edad"
-              value={pet.age}
-              onChangeText={text => {
-                const numeric = text.replace(/[^0-9]/g, '');
-                setPet(s => ({ ...s, age: numeric }));
+              value={pet.age !== null ? pet.age.toString() : ""}
+              onChangeText={(text) => {
+                const numeric = text.replace(/[^0-9]/g, "");
+                setPet((s) => ({
+                  ...s,
+                  age: numeric ? parseInt(numeric, 10) : null,
+                }));
               }}
               keyboardType="numeric"
               style={[styles.input, { flex: 1, marginRight: 10 }]}
             />
-            <Text style={{ fontSize: 16, color: '#555' }}></Text>
+            <Text style={{ fontSize: 16, color: "#555" }}></Text>
           </View>
 
           <TextInput
             placeholder="Género (Macho / Hembra)"
             value={pet.gender}
-            onChangeText={text => setPet(s => ({ ...s, gender: text }))}
+            onChangeText={(text) => setPet((s) => ({ ...s, gender: text }))}
             style={styles.input}
           />
 
-          <TouchableOpacity onPress={pickImage} style={[styles.input, styles.imagePicker]}>
-            <Text>{pet.image ? 'Imagen seleccionada ✅' : 'Seleccionar imagen 📷'}</Text>
+          <TextInput
+            placeholder="Peso en kg"
+            value={pet.weight !== null ? pet.weight.toString() : ""}
+            onChangeText={(text) => {
+              const numeric = text.replace(/[^0-9]/g, "");
+              setPet((s) => ({
+                ...s,
+                weight: numeric ? parseInt(numeric, 10) : null,
+              }));
+            }}
+            keyboardType="numeric"
+            style={styles.input}
+          />
+
+          <TouchableOpacity
+            onPress={pickImage}
+            style={[styles.input, styles.imagePicker]}
+          >
+            <Text>
+              {pet.image ? "Imagen seleccionada" : "Seleccionar imagen 📷"}
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
