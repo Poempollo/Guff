@@ -1,1 +1,1 @@
-mplementaciones del Context API de React, que permiten compartir estado global (autenticación, tema, usuario, etc.) entre componentes sin necesidad de prop drilling (pasar props manualmente).
+Implementaciones del Context API de React, que permiten compartir estado global (autenticación, tema, usuario, etc.) entre componentes sin necesidad de prop drilling (pasar props manualmente).

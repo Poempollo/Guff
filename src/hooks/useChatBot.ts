@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Audio } from "expo-av";
-import { ChatMessage } from "../services/chatbotService";
 import { sendMessageToBot } from "../api/chatbotApi";
 import { avatars } from "../../assets/avatars/Assistants";
 import { ScrollView } from "react-native";
+
+type ChatMessage = {
+  role: "user" | "assistant";
+  content: string;
+}
 
 export const useChatbot = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -75,7 +79,6 @@ export const useChatbot = () => {
       ]);
     } finally {
       setLoading(false);
-      setTimeout(() => scrollViewRef.current?.scrollToEnd({ animated: true }), 100);
     }
   };
 
