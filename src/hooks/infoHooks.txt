@@ -1,0 +1,1 @@
+Funciones reutilizables llamadas hooks personalizados que encapsulan lógica relacionada con el estado, efectos, peticiones o comportamiento específico de la app.
