@@ -40,7 +40,8 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <PetProvider> {/* 👈 Aquí envolvemos la app */}
+      {/* Envolvemos con el contexto de mascotas */}
+      <PetProvider>
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName="Login"
@@ -49,10 +50,7 @@ export default function App() {
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Main" component={BottomTabsNavigator} />
             <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen
-              name="ForgotPassword"
-              component={ForgotPasswordScreen}
-            />
+            <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PetProvider>
