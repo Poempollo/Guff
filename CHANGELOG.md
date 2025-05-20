@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.5.2] - 2025-05-20 - Javier
+#### Added
+- Añadido el funcionamiento con la api para las mascotas. petApi.ts agregado en /api/ no probado aú.
+
 ### [v0.5.1] - 2025-05-15 - Javier
 #### Improved
 - Mejorado el scroll en el chatbot, ahora scrollea siempre, no sólo cuando está el teclado abierto. Aún así a veces tarda un poco en reaccionar.
