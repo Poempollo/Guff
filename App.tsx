@@ -24,7 +24,7 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
-  const [isAppReady, setIsAppReady] = useState(false);
+  /*const [isAppReady, setIsAppReady] = useState(false);
   const [loaded] = useFonts({
     Montserrat_500Medium,
     Montserrat_700Bold,
@@ -36,7 +36,7 @@ export default function App() {
         onFinish={(isCancelled) => !isCancelled && setIsAppReady(true)}
       />
     );
-  }
+  }*/
 
   return (
     <SafeAreaProvider>

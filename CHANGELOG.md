@@ -1,8 +1,14 @@
 # Changelog
 
+### [v0.6] - 2025-05-21 - Javier
+#### Added
+- Añadida la carga de las mascotas del usuario desde la BD al iniciar sesión. Modificados los archivos de hooks para el login y las mascotas, así como sus componentes.
+#### Improved
+- Mejorada la gestión de algunos hooks, con los cambios nuevos.
+
 ### [v0.5.2] - 2025-05-20 - Javier
 #### Added
-- Añadido el funcionamiento con la api para las mascotas. petApi.ts agregado en /api/ no probado aú.
+- Añadido el funcionamiento con la api para las mascotas. petApi.ts agregado en /api/ no probado aún.
 
 ### [v0.5.1] - 2025-05-15 - Javier
 #### Improved

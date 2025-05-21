@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import * as api from '../api/petService';
+import * as api from '../api/petApi';
 import { Pet } from '../types';
 
 export const usePets = () => {

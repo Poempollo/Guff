@@ -1,9 +1,12 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Pet } from '../types';
 import { getStoredPets, savePets } from '../services/storageService';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getUserPets } from '../api/petApi';
 
 interface PetContextProps {
   pets: Pet[];
+  setPets: (pets: Pet[]) => void;
   addPet: (pet: Pet) => void;
   deletePet: (id: string) => void;
 }
@@ -15,9 +18,20 @@ export const PetProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const loadPets = async () => {
-      const storedPets = await getStoredPets();
-      setPets(storedPets);
+      try {
+        const token = await AsyncStorage.getItem('token');
+        if (!token) return;
+
+        const apiPets = await getUserPets();
+        setPets(apiPets);
+        savePets(apiPets);
+      } catch (error) {
+        console.error('Error al cargar mascotas desde la API:', error);
+        const storedPets = await getStoredPets();
+        setPets(storedPets);
+      }
     };
+
     loadPets();
   }, []);
 
@@ -34,7 +48,7 @@ export const PetProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <PetContext.Provider value={{ pets, addPet, deletePet }}>
+    <PetContext.Provider value={{ pets, setPets, addPet, deletePet }}>
       {children}
     </PetContext.Provider>
   );
