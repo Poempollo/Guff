@@ -14,24 +14,21 @@ export const usePets = () => {
 
   const addPet = useCallback(async (pet: Pet) => {
     try {
-      await api.addPet(pet);
+      await api.createPet(pet);
       setPets(prev => [...prev, pet]);
     } catch (e) {
       setError(e as Error);
     }
   }, []);
 
-  const deletePet = useCallback(async (index: number) => {
+  const deletePet = useCallback(async (petId: number) => {
     try {
-      const petToDelete = pets[index];
-      if (!petToDelete || !petToDelete.id) return;
-
-      await api.deletePet(petToDelete.id);
-      setPets(prev => prev.filter((_, i) => i !== index));
+      await api.deletePet(petId);
+      setPets(prev => prev.filter(p => p.id !== petId));
     } catch (e) {
       setError(e as Error);
     }
-  }, [pets]);
+  }, []);
 
   return { pets, addPet, deletePet, error };
 };

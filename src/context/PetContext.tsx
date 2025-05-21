@@ -2,13 +2,14 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { Pet } from '../types';
 import { getStoredPets, savePets } from '../services/storageService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getUserPets } from '../api/petApi';
+import { getUserPets, PetData } from '../api/petApi';
+import { createPet } from '../api/petApi';
 
 interface PetContextProps {
   pets: Pet[];
   setPets: (pets: Pet[]) => void;
-  addPet: (pet: Pet) => void;
-  deletePet: (id: string) => void;
+  addPet: (pet: PetData) => Promise<void>;
+  deletePet: (id: number) => void;
 }
 
 const PetContext = createContext<PetContextProps | undefined>(undefined);
@@ -35,13 +36,19 @@ export const PetProvider = ({ children }: { children: ReactNode }) => {
     loadPets();
   }, []);
 
-  const addPet = (pet: Pet) => {
-    const updated = [...pets, { ...pet, id: Date.now().toString() }];
-    setPets(updated);
-    savePets(updated);
+  const addPet = async (pet: PetData) => {
+    try {
+      const newPet = await createPet(pet);
+      const updated = [...pets, newPet];
+      setPets(updated);
+      savePets(updated)
+    } catch (error) {
+      console.error('Error al añadir mascota:', error);
+      throw error;
+    }
   };
 
-  const deletePet = (id: string) => {
+  const deletePet = async (id: number) => {
     const updated = pets.filter(p => p.id !== id);
     setPets(updated);
     savePets(updated);

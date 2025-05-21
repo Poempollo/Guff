@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.6.2] - 2025-05-21 - Javier
+#### Added
+- Se han añadido varias conexiones con la API para realizar los métodos necesarios. Faltan por revisar varios errores para completar la migración de local a trabajar con la BD.
+
 ### [v0.6.1] - 2025-05-21 - Javier
 #### Added
 - Ahora se muestran las mascotas guardadas en la BD del usuario cada vez que inicia sesión.
