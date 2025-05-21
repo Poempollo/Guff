@@ -2,15 +2,16 @@ import React from 'react';
 import { ScrollView, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from '../../../styles/HomeScreenStyles';
-import { Pet } from '../../../types';
+import { usePetContext } from '../../../context/PetContext';
 import { PetCard } from '../Card/PetCard';
 
 interface PetCarouselProps {
-  pets: Pet[];
   onAdd: () => void;
 }
 
-export const PetCarousel: React.FC<PetCarouselProps> = ({ pets, onAdd }) => {
+export const PetCarousel: React.FC<PetCarouselProps> = ({ onAdd }) => {
+  const { pets } = usePetContext();
+  
   return (
     <ScrollView
       horizontal

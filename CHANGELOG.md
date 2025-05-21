@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.6.1] - 2025-05-21 - Javier
+#### Added
+- Ahora se muestran las mascotas guardadas en la BD del usuario cada vez que inicia sesión.
+
 ### [v0.6] - 2025-05-21 - Javier
 #### Added
 - Añadida la carga de las mascotas del usuario desde la BD al iniciar sesión. Modificados los archivos de hooks para el login y las mascotas, así como sus componentes.

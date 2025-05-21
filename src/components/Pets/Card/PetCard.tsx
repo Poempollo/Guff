@@ -63,7 +63,7 @@ export const PetCard: React.FC<PetCardProps> = ({ pet, index }) => {
           {pet.breed} • {pet.age ? `${pet.age} años` : ""}
         </Text>
         <TouchableOpacity onPress={confirmDelete} style={styles.deleteButton}>
-          <Text style={styles.deleteText}>🗑 Eliminar</Text>
+          <Text style={styles.deleteText}>Eliminar</Text>
         </TouchableOpacity>
       </View>
     </Animated.View>

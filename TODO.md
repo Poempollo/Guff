@@ -1,8 +1,9 @@
 # To do
 
-## [2025-05-15] - Chatbot - Javier
-- Arreglar los estilos del chatbot, principalmente márgenes. 
-- Mover la funcionalidad a un screen, y separar en componentes los textos y botones de envío y tal.
+## [2025-05-21] - Pets - Javier
+- Eliminar el botón de "eliminar" en las tarjetas de las mascotas.
+- Mover esa funcionalidad, además de más información a la parte de abajo, donde aparecen las vacunas y tal.
+- Borrar la lista de mascotas en local al cerrar sesión ¿o al cerrar la aplicación? para evitar que se dupliquen o aparezcan donde no deben.
 
 ## [2025-05-11] - Navegación - Javier
 - Intentar hacer más suave el cambio de la animación, que no haya ese corte tan brusco.
