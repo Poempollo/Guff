@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.6.3] - 2025-05-22 - Javier 
+#### Improved
+- Mejorado el componente para la creación de mascotas, formalizando así las inyecciones en la BD. Revisar el TODO.md, aún muchas mejoras por añadir.
+
 ### [v0.6.2] - 2025-05-21 - Javier
 #### Added
 - Se han añadido varias conexiones con la API para realizar los métodos necesarios. Faltan por revisar varios errores para completar la migración de local a trabajar con la BD.

@@ -40,7 +40,6 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      {/* Envolvemos con el contexto de mascotas */}
       <PetProvider>
         <NavigationContainer>
           <Stack.Navigator

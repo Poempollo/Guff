@@ -1,5 +1,10 @@
 # To do
 
+## [2025-05-22] - Pets - Javier
+- Deshacerse del PetContext, y mover todo al usePets para trabajar con la api.
+- Mejorar el calendario, creando un componente propio, haciendo que el usuario escriba la fecha YYYY-MM-DD pero guiado, que se formatée sólo.
+- Imágenes, no sabemos como hacer para cargarlas y guardarlas en la BD.
+
 ## [2025-05-21] - Pets - Javier
 - Eliminar el botón de "eliminar" en las tarjetas de las mascotas.
 - Mover esa funcionalidad, además de más información a la parte de abajo, donde aparecen las vacunas y tal.
