@@ -13,6 +13,8 @@ import styles from "../../styles/PetStyles";
 import { usePets } from "../../hooks/usePets";
 import { PetData } from "../../api/petApi";
 import { SelectModal } from "../SelectModal";
+import { getUserPets } from "../../api/petApi";
+import { usePetContext } from "../../context/PetContext";
 
 const speciesOptions = ["Perro", "Gato", "Conejo"];
 const breedOptions: Record<string, string[]> = {
@@ -41,6 +43,8 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({ visible, onClose }) =>
   const [showBreedModal, setShowBreedModal] = useState(false);
   const [showGenderModal, setShowGenderModal] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  const {setPets } = usePetContext();
 
   const handleInput = (field: keyof typeof form, value: string) => {
     setForm(prev => ({ ...prev, [field]: value }));
@@ -86,6 +90,11 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({ visible, onClose }) =>
         distance_walked_km: 0,
       };
       await addPet(data);
+
+      // Cargamos las mascotas del usuario, para que aparezcan al guardar.
+      const pets = await getUserPets();
+      setPets(pets);
+
       onClose();
       setForm({ name: "", species: "", breed: "", gender: "", birth_date: "", photo_url: "" });
       setErrors({});
@@ -129,7 +138,7 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({ visible, onClose }) =>
           <Text style={styles.label}>Fecha de nacimiento</Text>
           <TouchableOpacity onPress={() => setShowDatePicker(true)} style={[styles.input, { justifyContent: 'center' }, errors.birth_date && { borderColor: 'red' }]}>
             <Text style={{ color: form.birth_date ? styles.input.color : '#aaa' }}>
-              {form.birth_date || "Selecciona fecha"} 📅
+              {form.birth_date || "Selecciona fecha"} 
             </Text>
           </TouchableOpacity>
           {!!errors.birth_date && <Text style={{ color: 'red', marginBottom: 5 }}>{errors.birth_date}</Text>}
@@ -152,7 +161,7 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({ visible, onClose }) =>
 
           <TouchableOpacity onPress={pickImage} style={[styles.imagePicker, errors.photo_url && { borderColor: 'red' }]}>
             <Text style={{ color: styles.input.color }}>
-              {form.photo_url ? "Imagen seleccionada ✅" : "Seleccionar imagen 📷"}
+              {form.photo_url ? "Imagen seleccionada" : "Seleccionar imagen"}
             </Text>
           </TouchableOpacity>
           {!!errors.photo_url && <Text style={{ color: 'red', marginBottom: 5 }}>{errors.photo_url}</Text>}

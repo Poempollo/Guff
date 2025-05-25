@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.6.4] - 2025-05-25 - Javier 
+#### Added
+- Ahora, al guardar una mascota se actualizan las del usuario, de forma que no hay que reiniciar la app para que aparezcan.
+
 ### [v0.6.3] - 2025-05-22 - Javier 
 #### Improved
 - Mejorado el componente para la creación de mascotas, formalizando así las inyecciones en la BD. Revisar el TODO.md, aún muchas mejoras por añadir.
