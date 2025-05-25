@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Pet } from '../types';
+import { Pet } from '../api/petApi';
 import { getStoredPets, savePets } from '../services/storageService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getUserPets, PetData } from '../api/petApi';

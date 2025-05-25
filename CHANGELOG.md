@@ -1,5 +1,10 @@
 # Changelog
 
+### [v0.6.4] - 2025-05-26 - Javier 
+#### Added
+- Ahora, aparecen las imágenes de las mascotas al cargarlas y crearlas.
+- Ya se borran las mascotas al pulsar en borrar. NO SE REACTUALIZAN.
+
 ### [v0.6.4] - 2025-05-25 - Javier 
 #### Added
 - Ahora, al guardar una mascota se actualizan las del usuario, de forma que no hay que reiniciar la app para que aparezcan.

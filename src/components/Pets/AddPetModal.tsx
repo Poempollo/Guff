@@ -44,7 +44,7 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({ visible, onClose }) =>
   const [showGenderModal, setShowGenderModal] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const {setPets } = usePetContext();
+  const { setPets } = usePetContext();
 
   const handleInput = (field: keyof typeof form, value: string) => {
     setForm(prev => ({ ...prev, [field]: value }));

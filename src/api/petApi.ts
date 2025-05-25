@@ -2,6 +2,11 @@ import { getToken } from "./authApi";
 
 const BASE_URL = 'https://guff-api-production.up.railway.app/pets';
 
+export interface Pet extends PetData{
+  id: number;
+  age: number;
+}
+
 export interface PetData {
     name: string;
     species: string;
@@ -13,6 +18,14 @@ export interface PetData {
     distance_walked_km?: number;
     photo_url?: string;
 };
+
+export interface Vaccine {
+
+}
+
+export interface Medication {
+
+}
 
 export const createPet = async (petData: PetData) => {
     const token = await getToken();

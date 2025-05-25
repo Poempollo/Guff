@@ -10,12 +10,12 @@ import { PetCarousel } from "../../components/Pets/Carousel/PetCarousel";
 import { AddPetModal } from "../../components/Pets/AddPetModal";
 import { VaccineBanner } from "../../components/Pets/Vaccine/VaccineBanner";
 import { MedicationList } from "../../components/Pets/Medication/MedicationList";
-import { usePetContext } from "../../context/PetContext";
-import { Vaccine, Medication } from "../../types";
+import { usePets } from "../../hooks/usePets";
+import { Vaccine, Medication } from "../../api/petApi";
 import styles from "../../styles/HomeScreenStyles";
 
 const PetsScreen: React.FC = () => {
-  const { pets } = usePetContext();
+  const { pets, deletePet } = usePets();
   const [modalVisible, setModalVisible] = useState(false);
 
   const nextVaccine: Vaccine = {
@@ -56,7 +56,7 @@ const PetsScreen: React.FC = () => {
           </View>
         ) : (
           <>
-            <PetCarousel pets={pets} onAdd={() => setModalVisible(true)} />
+            <PetCarousel pets={pets} onAdd={() => setModalVisible(true)} onDelete={deletePet} />
 
             <Text style={styles.sectionTitle}>Próxima Vacuna</Text>
             <VaccineBanner nextVaccine={nextVaccine} />

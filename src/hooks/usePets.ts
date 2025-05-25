@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import * as api from '../api/petApi';
 import { PetData } from '../api/petApi';
+import { Pet } from '../api/petApi';
 
 export const usePets = () => {
-  const [pets, setPets] = useState<PetData[]>([]);
+  const [pets, setPets] = useState<Pet[]>([]);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
@@ -21,10 +22,10 @@ export const usePets = () => {
     }
   }, [setPets]);
 
-  const deletePet = useCallback(async (petId: number) => {
+  const deletePet = useCallback(async (pet: Pet) => {
     try {
-      await api.deletePet(petId);
-      setPets(prev => prev.filter(p => p.id !== petId));
+      await api.deletePet(pet.id);
+      setPets(prev => prev.filter(p => p.id !== pet.id));
     } catch (e) {
       setError(e as Error);
     }
