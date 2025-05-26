@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Text,
   View,
@@ -7,17 +7,17 @@ import {
   ActivityIndicator,
   Keyboard,
   TouchableWithoutFeedback,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useFonts } from "expo-font";
 import {
   Montserrat_500Medium,
   Montserrat_700Bold,
-} from '@expo-google-fonts/montserrat';
+} from "@expo-google-fonts/montserrat";
 
-import LoginForm from './LoginForm';
-import styles from '../../styles/LoginStyles';
-import { useLogin } from '../../hooks/useLogin';
+import LoginForm from "./LoginForm";
+import styles from "../../styles/LoginStyles";
+import { useLogin } from "../../hooks/useLogin";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -47,12 +47,14 @@ const LoginScreen = () => {
         {/* Header */}
         <View style={styles.logoContainer}>
           <Image
-            source={require('../../../assets/logo.png')}
+            source={require("../../../assets/logo.png")}
             style={styles.logo}
             resizeMode="contain"
           />
           <Text style={styles.title}>Guff</Text>
-          <Text style={styles.subtitle}>Para nuestros mejores amigos peludos</Text>
+          <Text style={styles.subtitle}>
+            Para nuestros mejores amigos peludos
+          </Text>
         </View>
 
         {/* Formulario */}
@@ -86,10 +88,13 @@ const LoginScreen = () => {
 
         {/* Navegación */}
         <View style={styles.footerContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}> {/* Estos fallos son warnings, si que funcionan */}
+          {/* Estos fallos son warnings, sí que funcionan */}
+          <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
             <Text style={styles.footerLink}>¿No tienes cuenta? Regístrate</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ForgotPassword")}
+          >
             <Text style={styles.footerLink}>¿Olvidaste tu contraseña?</Text>
           </TouchableOpacity>
         </View>

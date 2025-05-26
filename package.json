@@ -12,7 +12,7 @@
   "dependencies": {
     "@expo-google-fonts/montserrat": "^0.3.0",
     "@expo/metro-runtime": "~5.0.4",
-    "@expo/vector-icons": "^14.0.2",
+    "@expo/vector-icons": "^14.1.0",
     "@react-native-async-storage/async-storage": "^2.1.2",
     "@react-native-community/datetimepicker": "^8.3.0",
     "@react-native-picker/picker": "^2.11.0",
@@ -38,8 +38,10 @@
     "react-native-reanimated": "~3.17.4",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.10.0",
+    "react-native-toast-message": "^2.3.0",
     "react-native-vector-icons": "^10.2.0",
-    "react-native-web": "^0.20.0"
+    "react-native-web": "^0.20.0",
+    "sonner-native": "^0.20.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

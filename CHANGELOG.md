@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.6.5] - 2025-05-26 - Raul 
+#### Added
+- Se ha integrado ventana "Mercado".
+- Se ha simulado un entorno de pago y se ha corregido error al agregar producto al "Carrito".
 ### [v0.6.4] - 2025-05-26 - Javier 
 #### Added
 - Ahora, aparecen las imágenes de las mascotas al cargarlas y crearlas.
