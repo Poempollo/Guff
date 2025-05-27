@@ -1,8 +1,17 @@
 # Changelog
 
+## Major Update
+### [v0.7] - 2025-05-27 - Javier y Raul
+#### Added
+- Añadida la vista de mercado completa y funcional.
+- Añadida parte de la funcionalidad de la vista mascotas. 80%.
+
+### [v0.6.5] - 2025-05-27 - Javier 
+#### Improved
+- Mejorada la gestión de las contraseñas generadas automáticamente por los dispositivos.
+
 ### [v0.6.7] - 2025-05-27 - Raul 
 #### Added
-
 - Corregido funcionalidad de "Pagar" ahora se realiza correctamente y muestra mensaje.
 
 ### [v0.6.6] - 2025-05-27 - Raul 
@@ -14,6 +23,7 @@
 #### Added
 - Se ha integrado ventana "Mercado".
 - Se ha simulado un entorno de pago y se ha corregido error al agregar producto al "Carrito".
+- 
 ### [v0.6.4] - 2025-05-26 - Javier 
 #### Added
 - Ahora, aparecen las imágenes de las mascotas al cargarlas y crearlas.

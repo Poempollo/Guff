@@ -37,7 +37,7 @@ export const validateUsername = (username: string) => {
 }
 
 export const validatePassword = (password: string) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&_/-]{8,}$/;
     password = password.trim(); //Elimina los espacios al principio y al final.
     if (!password.trim()) return "La contraseña es obligatoria";
     if (password.length < 8) return "La contraseña debe tener al menos 8 caracteres";
