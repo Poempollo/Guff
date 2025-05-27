@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.6.5] - 2025-05-27 - Javier 
+#### Improved
+- Mejorada la gestión de las contraseñas generadas automáticamente por los dispositivos.
+
 ### [v0.6.4] - 2025-05-26 - Javier 
 #### Added
 - Ahora, aparecen las imágenes de las mascotas al cargarlas y crearlas.
