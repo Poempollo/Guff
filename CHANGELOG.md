@@ -1,5 +1,10 @@
 # Changelog
 
+### [v0.6.6] - 2025-05-27 - Raul 
+#### Added
+- Se ha quitado los estilos de MarketScreen y se han añadido a /styles/Shop.
+- Se ha integrado interface Product y CarItem a types.ts.
+
 ### [v0.6.5] - 2025-05-26 - Raul 
 #### Added
 - Se ha integrado ventana "Mercado".
