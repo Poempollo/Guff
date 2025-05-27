@@ -1,5 +1,10 @@
 # Changelog
 
+### [v0.6.7] - 2025-05-27 - Raul 
+#### Added
+
+- Corregido funcionalidad de "Pagar" ahora se realiza correctamente y muestra mensaje.
+
 ### [v0.6.6] - 2025-05-27 - Raul 
 #### Added
 - Se ha quitado los estilos de MarketScreen y se han añadido a /styles/Shop.

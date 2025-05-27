@@ -89,9 +89,18 @@ export default function CheckoutModal({
     // Simular procesamiento de pago
     setTimeout(() => {
       setIsProcessing(false);
-      toast.success('¡Pago procesado exitosamente!', {
-        description: `Pedido confirmado por €${totalPrice.toFixed(2)}`
-      });
+     Alert.alert(
+  '¡Pago Exitoso!',
+  `Tu pedido ha sido confirmado por €${totalPrice.toFixed(2)}`,
+  [
+    {
+      text: 'OK',
+      onPress: () => {
+        onPaymentComplete();
+      },
+    },
+  ]
+);
       onPaymentComplete();
     }, 3000);
   };
