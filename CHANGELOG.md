@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.7.1] - 2025-05-28 - Javier 
+#### Fixed
+- Arreglado el registro para que maneje los token correctamente y no de fallos.
+
 ## Major Update
 ### [v0.7] - 2025-05-27 - Javier y Raul
 #### Added
