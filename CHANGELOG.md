@@ -1,5 +1,36 @@
 # Changelog
 
+### [v0.6.4] - 2025-05-26 - Javier 
+#### Added
+- Ahora, aparecen las imágenes de las mascotas al cargarlas y crearlas.
+- Ya se borran las mascotas al pulsar en borrar. NO SE REACTUALIZAN.
+
+### [v0.6.4] - 2025-05-25 - Javier 
+#### Added
+- Ahora, al guardar una mascota se actualizan las del usuario, de forma que no hay que reiniciar la app para que aparezcan.
+
+### [v0.6.3] - 2025-05-22 - Javier 
+#### Improved
+- Mejorado el componente para la creación de mascotas, formalizando así las inyecciones en la BD. Revisar el TODO.md, aún muchas mejoras por añadir.
+
+### [v0.6.2] - 2025-05-21 - Javier
+#### Added
+- Se han añadido varias conexiones con la API para realizar los métodos necesarios. Faltan por revisar varios errores para completar la migración de local a trabajar con la BD.
+
+### [v0.6.1] - 2025-05-21 - Javier
+#### Added
+- Ahora se muestran las mascotas guardadas en la BD del usuario cada vez que inicia sesión.
+
+### [v0.6] - 2025-05-21 - Javier
+#### Added
+- Añadida la carga de las mascotas del usuario desde la BD al iniciar sesión. Modificados los archivos de hooks para el login y las mascotas, así como sus componentes.
+#### Improved
+- Mejorada la gestión de algunos hooks, con los cambios nuevos.
+
+### [v0.5.2] - 2025-05-20 - Javier
+#### Added
+- Añadido el funcionamiento con la api para las mascotas. petApi.ts agregado en /api/ no probado aún.
+
 ### [v0.5.1] - 2025-05-15 - Javier
 #### Improved
 - Mejorado el scroll en el chatbot, ahora scrollea siempre, no sólo cuando está el teclado abierto. Aún así a veces tarda un poco en reaccionar.

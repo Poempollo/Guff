@@ -86,7 +86,7 @@ const LoginScreen = () => {
 
         {/* Navegación */}
         <View style={styles.footerContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}> {/* Estos fallos son warnings, si que funcionan */}
             <Text style={styles.footerLink}>¿No tienes cuenta? Regístrate</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>

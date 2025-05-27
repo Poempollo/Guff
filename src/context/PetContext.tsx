@@ -1,11 +1,15 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Pet } from '../types';
+import { Pet } from '../api/petApi';
 import { getStoredPets, savePets } from '../services/storageService';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getUserPets, PetData } from '../api/petApi';
+import { createPet } from '../api/petApi';
 
 interface PetContextProps {
   pets: Pet[];
-  addPet: (pet: Pet) => void;
-  deletePet: (id: string) => void;
+  setPets: (pets: Pet[]) => void;
+  addPet: (pet: PetData) => Promise<void>;
+  deletePet: (id: number) => void;
 }
 
 const PetContext = createContext<PetContextProps | undefined>(undefined);
@@ -15,26 +19,43 @@ export const PetProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const loadPets = async () => {
-      const storedPets = await getStoredPets();
-      setPets(storedPets);
+      try {
+        const token = await AsyncStorage.getItem('token');
+        if (!token) return;
+
+        const apiPets = await getUserPets();
+        setPets(apiPets);
+        savePets(apiPets);
+      } catch (error) {
+        console.error('Error al cargar mascotas desde la API:', error);
+        const storedPets = await getStoredPets();
+        setPets(storedPets);
+      }
     };
+
     loadPets();
   }, []);
 
-  const addPet = (pet: Pet) => {
-    const updated = [...pets, { ...pet, id: Date.now().toString() }];
-    setPets(updated);
-    savePets(updated);
+  const addPet = async (pet: PetData) => {
+    try {
+      const newPet = await createPet(pet);
+      const updated = [...pets, newPet];
+      setPets(updated);
+      savePets(updated)
+    } catch (error) {
+      console.error('Error al añadir mascota:', error);
+      throw error;
+    }
   };
 
-  const deletePet = (id: string) => {
+  const deletePet = async (id: number) => {
     const updated = pets.filter(p => p.id !== id);
     setPets(updated);
     savePets(updated);
   };
 
   return (
-    <PetContext.Provider value={{ pets, addPet, deletePet }}>
+    <PetContext.Provider value={{ pets, setPets, addPet, deletePet }}>
       {children}
     </PetContext.Provider>
   );

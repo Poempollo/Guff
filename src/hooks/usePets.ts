@@ -1,37 +1,35 @@
 import { useState, useEffect, useCallback } from 'react';
-import * as api from '../api/petService';
-import { Pet } from '../types';
+import * as api from '../api/petApi';
+import { PetData } from '../api/petApi';
+import { Pet } from '../api/petApi';
 
 export const usePets = () => {
   const [pets, setPets] = useState<Pet[]>([]);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    api.getPets()
+    api.getUserPets()
       .then(setPets)
       .catch(setError);
   }, []);
 
-  const addPet = useCallback(async (pet: Pet) => {
+  const addPet = useCallback(async (petData: PetData) => {
     try {
-      await api.addPet(pet);
-      setPets(prev => [...prev, pet]);
+      const created = await api.createPet(petData);
+      setPets(prev => [...prev, created]);
+    } catch (e) {
+      setError(e as Error);
+    }
+  }, [setPets]);
+
+  const deletePet = useCallback(async (pet: Pet) => {
+    try {
+      await api.deletePet(pet.id);
+      setPets(prev => prev.filter(p => p.id !== pet.id));
     } catch (e) {
       setError(e as Error);
     }
   }, []);
-
-  const deletePet = useCallback(async (index: number) => {
-    try {
-      const petToDelete = pets[index];
-      if (!petToDelete || !petToDelete.id) return;
-
-      await api.deletePet(petToDelete.id);
-      setPets(prev => prev.filter((_, i) => i !== index));
-    } catch (e) {
-      setError(e as Error);
-    }
-  }, [pets]);
 
   return { pets, addPet, deletePet, error };
 };
