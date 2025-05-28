@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.7.3] - 2025-05-28 - Javier 
+#### Added
+- Añadido un pullrefresh en petsScreen, que se encarga de reactualizar las mascotas, tras borrar o añadir alguna.
+
 ### [v0.7.2] - 2025-05-28 - Javier 
 #### Fixed
 - Movida la funcionalidad de PetContext a usePets, más limpio y fácil de mantener.
