@@ -1,5 +1,10 @@
 # Changelog
 
+### [v0.7.2] - 2025-05-28 - Javier 
+#### Fixed
+- Movida la funcionalidad de PetContext a usePets, más limpio y fácil de mantener.
+- Agregado un método para actualizar correctamente las mascotas al borrar o crear alguna. RefreshPets.
+
 ### [v0.7.1] - 2025-05-28 - Javier 
 #### Fixed
 - Arreglado el registro para que maneje los token correctamente y no de fallos.
