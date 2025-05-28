@@ -13,7 +13,7 @@
 #### Fixed
 - Arreglado el registro para que maneje los token correctamente y no de fallos.
 
-## Major Update
+## Minor Update
 ### [v0.7] - 2025-05-27 - Javier y Raul
 #### Added
 - Añadida la vista de mercado completa y funcional.

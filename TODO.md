@@ -1,6 +1,9 @@
 # To do
 
 ## [2025-05-28] - SignUp - Javier
+- Para que funcione el "eliminar cuenta" de un usuario, debemos antes eliminar todas las mascotas, si no, falla. Meter en un for each todas las mascotas del user, y eliminarlas todas, justo antes de pasar al deleteUser.
+
+## [2025-05-28] - SignUp - Javier
 - Añadir errores personalizados al SignUp para usuario ya en uso, correo ya en uso etc.
 
 ## [2025-05-26] - Pets - Javier
