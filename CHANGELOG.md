@@ -1,5 +1,11 @@
 # Changelog
 
+### [v0.7] - 2025-05-28 - Raul 
+#### Added
+- Se ha añadido nueva ventana y botón "Map".
+- Se ha puesto los estilos y el const Place en archivos separados para mejor rendimiento y reutilización.
+- Se ha modificado los colores del mapa acorde al estilo realizado hasta ahora.
+
 ### [v0.6.7] - 2025-05-27 - Raul 
 #### Added
 

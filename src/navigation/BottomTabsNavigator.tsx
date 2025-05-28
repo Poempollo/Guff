@@ -7,6 +7,7 @@ import SettingsStack from "./SettingsStackNavigator";
 import PetsScreen from "../screens/pets/PetsScreen";
 import MarketScreen from "../screens/market/MarketScreen";
 import Animated, { useAnimatedStyle, withSpring } from "react-native-reanimated";
+import MapScreen from "../screens/map/MapScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,6 +27,8 @@ const BottomTabsNavigator = () => {
             iconName = focused ? "settings" : "settings-outline";
           } else if (route.name === "Chatbot") {
             iconName = focused ? "chatbox" : "chatbox-outline";
+          }else if (route.name === "Map") {
+            iconName = focused ? "map" : "map-outline";
           }
 
           const animatedStyle = useAnimatedStyle(() => {
@@ -69,6 +72,7 @@ const BottomTabsNavigator = () => {
       <Tab.Screen name="Market" component={MarketScreen} />
       <Tab.Screen name="Chatbot" component={ChatbotScreen} />
       <Tab.Screen name="Settings" component={SettingsStack} />
+      <Tab.Screen name="Map" component={MapScreen} />
     </Tab.Navigator>
   );
 };

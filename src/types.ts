@@ -35,3 +35,16 @@ export interface Product {
 export interface CartItem extends Product {
   quantity: number;
 }
+
+
+export interface Place {
+  id: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+  type: 'veterinary' | 'dog_park';
+  address?: string;
+  phone?: string;
+  openingHours?: string;
+  rating?: number;
+}
