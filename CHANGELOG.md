@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.7.4] - 2025-05-30 - Javier 
+#### Fixed
+- Ahora las mascotas se eliminan antes de borrar al usuario, funcionando correctamente.
+
 ### [v0.7.3] - 2025-05-28 - Javier 
 #### Added
 - Añadido un pullrefresh en petsScreen, que se encarga de reactualizar las mascotas, tras borrar o añadir alguna.

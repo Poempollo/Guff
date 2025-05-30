@@ -5,6 +5,7 @@ import { deleteAccount, getToken } from '../api/authApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../App';
+import { deletePet, getUserPets } from '../api/petApi';
 
 export const useSettings = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -36,6 +37,15 @@ export const useSettings = () => {
           style: 'destructive',
           onPress: async () => {
             try {
+              // Obtenemos las mascotas
+              const pets = await getUserPets();
+
+              // Las eliminamos todas
+              for (const pet of pets) {
+                await deletePet(pet.id);
+              }
+
+              // Pasamos a eliminar la cuenta, limpiar el token, y redirigir
               await deleteAccount(token);
               await AsyncStorage.removeItem('authToken');
               navigation.reset({
