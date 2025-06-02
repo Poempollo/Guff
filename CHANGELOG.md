@@ -1,5 +1,12 @@
 # Changelog
 
+### [v0.8] - 2025-05-28 - Raul 
+#### Added
+- Se ha implementado un método de suscripciones, el cual dependiendo de cual se elija, se pueda acceder o no a ciertos apartados.
+- La versión "Free" solo tiene acceso a Creación de mascotas, "Mercado" y a los ajustes de la aplicación.
+- La versión "Intermedia" tiene acceso a lo anteorior más "ChatBot".
+- La versión "Premium" tiene accesoa a todo.
+
 ### [v0.7] - 2025-05-28 - Raul 
 #### Added
 - Se ha añadido nueva ventana y botón "Map".

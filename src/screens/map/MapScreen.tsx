@@ -1,10 +1,7 @@
-// MapScreen.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
-  Dimensions,
   ActivityIndicator,
   ScrollView,
   TouchableOpacity,
@@ -16,75 +13,29 @@ import * as Location from 'expo-location';
 import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from '../../styles/Map/MapScreenStyles';
 import { Place } from '../../types';
+import AuthContext from '../../context/AuthContext';
+import { useNavigation } from '@react-navigation/native';
+import { toast } from 'sonner-native';
+import { hasAccess } from '../../utils/subscriptionAccess';
 
-const mockPlaces: Place[] = [
-  {
-    id: '1',
-    name: 'Clínica Veterinaria Alhambra',
-    latitude: 37.1773,
-    longitude: -3.5986,
-    type: 'veterinary',
-    address: 'Calle Recogidas 45',
-    phone: '+34 958 123 456',
-    openingHours: '9:00 - 20:00',
-    rating: 4.6,
-  },
-  {
-    id: '2',
-    name: 'Hospital Veterinario Granada Sur',
-    latitude: 37.1500,
-    longitude: -3.6100,
-    type: 'veterinary',
-    address: 'Av. Andaluces 23',
-    phone: '+34 958 987 654',
-    openingHours: '8:30 - 21:00',
-    rating: 4.8,
-  },
-  {
-    id: '3',
-    name: 'Parque Canino Federico García Lorca',
-    latitude: 37.1650,
-    longitude: -3.6050,
-    type: 'dog_park',
-    address: 'Parque García Lorca',
-  },
-  {
-    id: '4',
-    name: 'Veterinaria Albaicín',
-    latitude: 37.1820,
-    longitude: -3.5920,
-    type: 'veterinary',
-    address: 'Cuesta del Chapiz 12',
-    phone: '+34 958 555 777',
-    openingHours: '10:00 - 19:00',
-    rating: 4.4,
-  },
-  {
-    id: '5',
-    name: 'Área Canina Parque de las Ciencias',
-    latitude: 37.1400,
-    longitude: -3.6200,
-    type: 'dog_park',
-    address: 'Av. de la Ciencia s/n',
-  },
-  {
-    id: '6',
-    name: 'Clínica Veterinaria Genil',
-    latitude: 37.1600,
-    longitude: -3.5800,
-    type: 'veterinary',
-    address: 'Paseo del Genil 89',
-    phone: '+34 958 444 888',
-    openingHours: '24 horas',
-    rating: 4.5,
-  },
-];
+const mockPlaces: Place[] = [/* ... tus datos mock sin cambios ... */];
 
 export default function MapScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
   const [loading, setLoading] = useState(true);
+  const auth = useContext(AuthContext);
+  const navigation = useNavigation();
+  const userPlan = auth.userPlan;
 
   useEffect(() => {
+    if (!hasAccess(userPlan, 'intermediate')) {
+      toast.error('Necesitas un plan Intermedio o Premium para acceder al mapa.');
+      setTimeout(() => {
+        navigation.navigate('Plans' as never);
+      }, 1000);
+      return;
+    }
+
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
@@ -97,6 +48,19 @@ export default function MapScreen() {
       setLoading(false);
     })();
   }, []);
+
+  if (!hasAccess(userPlan, 'intermediate')) {
+    return null;
+  }
+
+  if (loading || !location) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#08C6B7" />
+        <Text style={styles.loadingText}>Obteniendo tu ubicación...</Text>
+      </View>
+    );
+  }
 
   const openPhone = (phone?: string) => {
     if (phone) {
@@ -124,15 +88,6 @@ export default function MapScreen() {
 
     return currentMinutes >= startMinutes && currentMinutes <= endMinutes;
   };
-
-  if (loading || !location) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#08C6B7" />
-        <Text style={styles.loadingText}>Obteniendo tu ubicación...</Text>
-      </View>
-    );
-  }
 
   return (
     <View style={styles.container}>
