@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -42,15 +42,24 @@ export default function App() {
 }
 
 const AppLoader = () => {
-  const { loading } = useContext(AuthContext);
+  const { loading: authLoading } = useContext(AuthContext);
+  const [appReady, setAppReady] = useState(false);
 
   const [fontsLoaded] = useFonts({
     Montserrat_500Medium,
     Montserrat_700Bold,
   });
 
-  if (!fontsLoaded || loading) {
-    return <SplashScreen onFinish={() => {}} />;
+  if (!fontsLoaded || authLoading || !appReady) {
+    return (
+      <SplashScreen
+        onFinish={(isCancelled: boolean) => {
+          if (!isCancelled) {
+            setAppReady(true);
+          }
+        }}
+      />
+    );
   }
 
   return (
