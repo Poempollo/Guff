@@ -48,3 +48,13 @@ export interface Place {
   openingHours?: string;
   rating?: number;
 }
+
+export type Plan = {
+  id: "free" | "intermediate" | "premium";
+  name: string;
+  price: string;
+  color: string;
+  features: string[];
+  description: string;
+  image: string;
+};

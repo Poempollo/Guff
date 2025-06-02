@@ -7,14 +7,14 @@ const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center',    // CENTRADO vertical
-    alignItems: 'center',        // CENTRADO horizontal
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalContent: {
-    width: '90%',                // un poco de margen lateral
-    height: height * 0.8,        // 💡 ocupa el 80% de la altura de pantalla
+    width: '90%',
+    height: height * 0.8,
     backgroundColor: colors.white,
-    borderRadius: 20,            // bordes suaves
+    borderRadius: 20,
     padding: 25,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

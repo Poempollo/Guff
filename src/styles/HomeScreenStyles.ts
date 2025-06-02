@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   fontFamily: "Montserrat_700Bold",
   color: colors.primary,
   textAlign: "center",
-  marginBottom: 30, // Espacio entre el título y el carrusel
+  marginBottom: 30,
 },
   title: {
     fontSize: 32,

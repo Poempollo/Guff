@@ -67,7 +67,7 @@ const PetsScreen: React.FC = () => {
           </>
         )}
 
-        {/* Botón de mejora de plan, siempre visible */}
+      
         <UpgradePlanButton />
       </ScrollView>
     </SafeAreaView>

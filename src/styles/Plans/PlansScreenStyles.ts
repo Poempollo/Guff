@@ -1,0 +1,143 @@
+import { StyleSheet } from 'react-native';
+import { colors } from '../../styles/theme';
+
+export default StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  contentContainer: {
+    padding: 20,
+    paddingBottom: 40,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+    color: colors.text,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: colors.subtitle,
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  plansContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+  },
+  planCard: {
+    backgroundColor: colors.white,
+    borderRadius: 12,
+    padding: 20,
+    marginBottom: 20,
+    width: '100%',
+    maxWidth: 360,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+    borderWidth: 2,
+    borderColor: 'transparent',
+    position: 'relative',
+  },
+  selectedCard: {
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 6,
+  },
+  premiumCard: {
+    shadowColor: '#FF6B6B',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 10,
+  },
+  planImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignSelf: 'center',
+    marginBottom: 16,
+  },
+  planName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 4,
+    textAlign: 'center',
+  },
+  planPrice: {
+    fontSize: 20,
+    marginBottom: 16,
+    textAlign: 'center',
+    color: colors.subtitle,
+    fontWeight: '500',
+  },
+  planDescription: {
+    fontSize: 14,
+    color: colors.subtitle,
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  featuresContainer: {
+    marginBottom: 20,
+  },
+  featureRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  checkIcon: {
+    marginRight: 8,
+  },
+  featureText: {
+    fontSize: 14,
+    color: colors.subtitle,
+    flex: 1,
+  },
+  selectButton: {
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  selectButtonText: {
+    color: colors.white,
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  popularTag: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    backgroundColor: '#FF6B6B',
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 12,
+  },
+  popularTagText: {
+    color: colors.white,
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
+  currentPlanBadge: {
+    position: 'absolute',
+    top: -10,
+    left: '50%',
+    transform: [{ translateX: -50 }],
+    backgroundColor: '#4CAF50',
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+  },
+  currentPlanText: {
+    color: colors.white,
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
+});

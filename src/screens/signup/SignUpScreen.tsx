@@ -122,7 +122,7 @@ const SignUpScreen = () => {
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Image
-            source={require("../.././../assets/logo.png")} // Ajusta la ruta según tu estructura
+            source={require("../.././../assets/logo.png")}
             style={styles.logo}
             resizeMode="contain"
           />

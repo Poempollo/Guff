@@ -1,5 +1,14 @@
 # Changelog
 
+### [v0.8.2] - 2025-06-02 - Raul 
+#### Added
+
+- Se ha cambiado imagenes de los planes por unas mucho mas atractivas.
+- Se ha ajustado el tamaño de la pantalla para que quede ajustada al dispositivo y se vean 
+  los componentes de forma correcta.
+- Se ha ordenado todos los estilos en sus carpetas correspondientes para mejor rendimiento y manejo
+  de errores.
+
 ### [v0.8.1] - 2025-06-02 - Raul 
 #### Added
 
