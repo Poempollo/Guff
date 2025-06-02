@@ -6,13 +6,14 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import { usePets } from "../../hooks/usePets";
+import { Vaccine, Medication } from "../../api/petApi";
+import styles from "../../styles/HomeScreenStyles";
 import { PetCarousel } from "../../components/Pets/Carousel/PetCarousel";
 import { AddPetModal } from "../../components/Pets/AddPetModal";
 import { VaccineBanner } from "../../components/Pets/Vaccine/VaccineBanner";
 import { MedicationList } from "../../components/Pets/Medication/MedicationList";
-import { usePets } from "../../hooks/usePets";
-import { Vaccine, Medication } from "../../api/petApi";
-import styles from "../../styles/HomeScreenStyles";
+import UpgradePlanButton from "../../components/Plans/UpgradePlanButton";
 
 const PetsScreen: React.FC = () => {
   const { pets, deletePet } = usePets();
@@ -41,7 +42,7 @@ const PetsScreen: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <AddPetModal visible={modalVisible} onClose={() => setModalVisible(false)} />
 
-      <ScrollView contentContainerStyle={{ paddingBottom: 120 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 140 }}>
         <Text style={styles.titleCentered}>Mis Mascotas</Text>
 
         {pets.length === 0 ? (
@@ -65,6 +66,9 @@ const PetsScreen: React.FC = () => {
             <MedicationList medications={medications} />
           </>
         )}
+
+        {/* Botón de mejora de plan, siempre visible */}
+        <UpgradePlanButton />
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,19 +1,25 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useCallback,
+} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PlanLevel } from '../utils/subscriptionAccess';
 
 interface AuthContextProps {
   userPlan: PlanLevel;
-  signOut: () => void;
-  signIn: (plan: PlanLevel) => void;
   loading: boolean;
+  signIn: (plan: PlanLevel) => void;
+  signOut: () => void;
 }
 
 const AuthContext = createContext<AuthContextProps>({
   userPlan: 'free',
-  signOut: () => {},
-  signIn: () => {},
   loading: true,
+  signIn: () => {},
+  signOut: () => {},
 });
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -28,7 +34,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           setUserPlan(storedPlan as PlanLevel);
         }
       } catch (error) {
-        console.error('Error al cargar plan desde almacenamiento:', error);
+        console.error('Error al cargar el plan desde AsyncStorage:', error);
       } finally {
         setLoading(false);
       }
@@ -37,26 +43,26 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     loadStoredPlan();
   }, []);
 
-  const signIn = async (plan: PlanLevel) => {
+  const signIn = useCallback(async (plan: PlanLevel) => {
     try {
       await AsyncStorage.setItem('@userPlan', plan);
       setUserPlan(plan);
     } catch (error) {
-      console.error('Error al guardar el plan:', error);
+      console.error('Error al guardar el plan en AsyncStorage:', error);
     }
-  };
+  }, []);
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     try {
       await AsyncStorage.removeItem('@userPlan');
       setUserPlan('free');
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
     }
-  };
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ userPlan, signOut, signIn, loading }}>
+    <AuthContext.Provider value={{ userPlan, loading, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

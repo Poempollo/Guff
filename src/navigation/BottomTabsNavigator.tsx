@@ -13,7 +13,16 @@ import MapScreen from "../screens/map/MapScreen";
 import AuthContext from "../context/AuthContext";
 import { hasAccess } from "../utils/subscriptionAccess";
 
-const Tab = createBottomTabNavigator();
+// 👉 Tipado de las rutas del tab navigator
+export type TabsParamList = {
+  Home: undefined;
+  Market: undefined;
+  Chatbot: undefined;
+  Settings: undefined;
+  Map: undefined;
+};
+
+const Tab = createBottomTabNavigator<TabsParamList>();
 
 const BottomTabsNavigator = () => {
   const { userPlan } = useContext(AuthContext);
@@ -53,7 +62,11 @@ const BottomTabsNavigator = () => {
 
           return (
             <Animated.View style={animatedStyle}>
-              <Ionicons name={showLock ? "lock-closed" : iconName} size={24} color={color} />
+              <Ionicons
+                name={showLock ? "lock-closed" : iconName}
+                size={24}
+                color={color}
+              />
             </Animated.View>
           );
         },

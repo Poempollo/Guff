@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   Text,
@@ -7,70 +7,145 @@ import {
   TouchableOpacity,
   Linking,
   Platform,
+  StyleSheet,
 } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
-import { MaterialIcons } from '@expo/vector-icons';
-import { styles } from '../../styles/Map/MapScreenStyles';
+import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { styles as mapStyles } from '../../styles/Map/MapScreenStyles';
 import { Place } from '../../types';
 import AuthContext from '../../context/AuthContext';
-import { useNavigation } from '@react-navigation/native';
-import { toast } from 'sonner-native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { hasAccess } from '../../utils/subscriptionAccess';
 
-const mockPlaces: Place[] = [/* ... tus datos mock sin cambios ... */];
+const mockPlaces: Place[] = [
+  {
+    id: '1',
+    name: 'Clínica Veterinaria Alhambra',
+    latitude: 37.1773,
+    longitude: -3.5986,
+    type: 'veterinary',
+    address: 'Calle Recogidas 45',
+    phone: '+34 958 123 456',
+    openingHours: '9:00 - 20:00',
+    rating: 4.6,
+  },
+  {
+    id: '2',
+    name: 'Hospital Veterinario Granada Sur',
+    latitude: 37.1500,
+    longitude: -3.6100,
+    type: 'veterinary',
+    address: 'Av. Andaluces 23',
+    phone: '+34 958 987 654',
+    openingHours: '8:30 - 21:00',
+    rating: 4.8,
+  },
+  {
+    id: '3',
+    name: 'Parque Canino Federico García Lorca',
+    latitude: 37.1650,
+    longitude: -3.6050,
+    type: 'dog_park',
+    address: 'Parque García Lorca',
+  },
+  {
+    id: '4',
+    name: 'Veterinaria Albaicín',
+    latitude: 37.1820,
+    longitude: -3.5920,
+    type: 'veterinary',
+    address: 'Cuesta del Chapiz 12',
+    phone: '+34 958 555 777',
+    openingHours: '10:00 - 19:00',
+    rating: 4.4,
+  },
+  {
+    id: '5',
+    name: 'Área Canina Parque de las Ciencias',
+    latitude: 37.1400,
+    longitude: -3.6200,
+    type: 'dog_park',
+    address: 'Av. de la Ciencia s/n',
+  },
+  {
+    id: '6',
+    name: 'Clínica Veterinaria Genil',
+    latitude: 37.1600,
+    longitude: -3.5800,
+    type: 'veterinary',
+    address: 'Paseo del Genil 89',
+    phone: '+34 958 444 888',
+    openingHours: '24 horas',
+    rating: 4.5,
+  },
+];
+
 
 export default function MapScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
   const [loading, setLoading] = useState(true);
+  const [blocked, setBlocked] = useState(false);
   const auth = useContext(AuthContext);
   const navigation = useNavigation();
-  const userPlan = auth.userPlan;
 
-  useEffect(() => {
-    if (!hasAccess(userPlan, 'intermediate')) {
-      toast.error('Necesitas un plan Intermedio o Premium para acceder al mapa.');
-      setTimeout(() => {
-        navigation.navigate('Plans' as never);
-      }, 1000);
-      return;
-    }
+  useFocusEffect(
+    React.useCallback(() => {
+      const checkAccess = async () => {
+        if (!hasAccess(auth.userPlan, 'intermediate')) {
+          setBlocked(true);
+          setLoading(false);
+          return;
+        }
 
-    (async () => {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
+        setBlocked(false);
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          setLoading(false);
+          return;
+        }
+
+        const currentLocation = await Location.getCurrentPositionAsync({});
+        setLocation(currentLocation);
         setLoading(false);
-        return;
-      }
+      };
 
-      const currentLocation = await Location.getCurrentPositionAsync({});
-      setLocation(currentLocation);
-      setLoading(false);
-    })();
-  }, []);
+      checkAccess();
+    }, [auth.userPlan])
+  );
 
-  if (!hasAccess(userPlan, 'intermediate')) {
-    return null;
-  }
-
-  if (loading || !location) {
+  if (blocked) {
     return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#08C6B7" />
-        <Text style={styles.loadingText}>Obteniendo tu ubicación...</Text>
+      <View style={lockedStyles.lockedOverlay}>
+        <Ionicons name="lock-closed" size={64} color="#fff" />
+        <Text style={lockedStyles.lockedTitle}>Acceso exclusivo</Text>
+        <Text style={lockedStyles.lockedSubtitle}>
+          Esta función es solo para usuarios con el plan{' '}
+          <Text style={{ fontWeight: 'bold' }}>Intermedio</Text> o superior.
+        </Text>
+
+        <TouchableOpacity
+          style={lockedStyles.upgradeButton}
+          onPress={() => navigation.navigate('Plans' as never)}
+        >
+          <Text style={lockedStyles.upgradeText}>Mejorar mi plan</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 
-  const openPhone = (phone?: string) => {
-    if (phone) {
-      Linking.openURL(`tel:${phone}`);
-    }
-  };
+  if (loading || !location) {
+    return (
+      <View style={mapStyles.loadingContainer}>
+        <ActivityIndicator size="large" color="#08C6B7" />
+        <Text style={mapStyles.loadingText}>Obteniendo tu ubicación...</Text>
+      </View>
+    );
+  }
 
-  const openMaps = (latitude: number, longitude: number) => {
-    Linking.openURL(`https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`);
-  };
+  const openPhone = (phone?: string) => phone && Linking.openURL(`tel:${phone}`);
+  const openMaps = (lat: number, lng: number) =>
+    Linking.openURL(`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`);
 
   const isOpen = (place: Place): boolean => {
     if (place.type === 'dog_park') return true;
@@ -78,21 +153,17 @@ export default function MapScreen() {
     if (place.openingHours.toLowerCase().includes('24')) return true;
 
     const now = new Date();
-    const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
+    const current = now.getHours() * 60 + now.getMinutes();
     const [start, end] = place.openingHours.split('-').map(t => t.trim());
-    const [startH, startM] = start.split(':').map(Number);
-    const [endH, endM] = end.split(':').map(Number);
-    const startMinutes = startH * 60 + startM;
-    const endMinutes = endH * 60 + endM;
-
-    return currentMinutes >= startMinutes && currentMinutes <= endMinutes;
+    const [sH, sM] = start.split(':').map(Number);
+    const [eH, eM] = end.split(':').map(Number);
+    return current >= (sH * 60 + sM) && current <= (eH * 60 + eM);
   };
 
   return (
-    <View style={styles.container}>
+    <View style={mapStyles.container}>
       <MapView
-        style={styles.map}
+        style={mapStyles.map}
         provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
         region={{
           latitude: location.coords.latitude,
@@ -113,12 +184,12 @@ export default function MapScreen() {
         ))}
       </MapView>
 
-      <ScrollView style={styles.placeList}>
+      <ScrollView style={mapStyles.placeList}>
         {mockPlaces.map((place) => (
-          <View key={place.id} style={styles.card}>
-            <View style={styles.cardHeader}>
+          <View key={place.id} style={mapStyles.card}>
+            <View style={mapStyles.cardHeader}>
               <View style={[
-                styles.iconCircle,
+                mapStyles.iconCircle,
                 { backgroundColor: place.type === 'veterinary' ? '#08C6B7' : '#FFD93D' }
               ]}>
                 <MaterialIcons
@@ -127,44 +198,39 @@ export default function MapScreen() {
                   color="white"
                 />
               </View>
-              <Text style={styles.placeName}>{place.name}</Text>
+              <Text style={mapStyles.placeName}>{place.name}</Text>
             </View>
-
-            <Text style={styles.address}>{place.address}</Text>
-
-            {place.type === 'veterinary' && place.openingHours && (
-              <View style={styles.detailRow}>
+            <Text style={mapStyles.address}>{place.address}</Text>
+            {place.openingHours && (
+              <View style={mapStyles.detailRow}>
                 <MaterialIcons name="schedule" size={16} color="#333" />
-                <Text style={styles.detailText}>{place.openingHours}</Text>
+                <Text style={mapStyles.detailText}>{place.openingHours}</Text>
               </View>
             )}
-
-            {place.type === 'veterinary' && place.rating && (
-              <View style={styles.detailRow}>
+            {place.rating && (
+              <View style={mapStyles.detailRow}>
                 <MaterialIcons name="star" size={16} color="#FFD93D" />
-                <Text style={styles.detailText}>{place.rating}</Text>
+                <Text style={mapStyles.detailText}>{place.rating}</Text>
               </View>
             )}
-
-            <View style={styles.statusRow}>
+            <View style={mapStyles.statusRow}>
               <View style={[
-                styles.statusBadge,
+                mapStyles.statusBadge,
                 { backgroundColor: isOpen(place) ? '#08C6B7' : '#FFD93D' }
               ]}>
-                <Text style={styles.statusText}>{isOpen(place) ? 'Abierto' : 'Cerrado'}</Text>
+                <Text style={mapStyles.statusText}>{isOpen(place) ? 'Abierto' : 'Cerrado'}</Text>
               </View>
             </View>
-
-            <View style={styles.actions}>
+            <View style={mapStyles.actions}>
               {place.phone && (
-                <TouchableOpacity onPress={() => openPhone(place.phone)} style={styles.actionBtn}>
+                <TouchableOpacity onPress={() => openPhone(place.phone)} style={mapStyles.actionBtn}>
                   <MaterialIcons name="phone" size={18} color="#08C6B7" />
-                  <Text style={styles.actionText}>Llamar</Text>
+                  <Text style={mapStyles.actionText}>Llamar</Text>
                 </TouchableOpacity>
               )}
-              <TouchableOpacity onPress={() => openMaps(place.latitude, place.longitude)} style={styles.actionBtn}>
+              <TouchableOpacity onPress={() => openMaps(place.latitude, place.longitude)} style={mapStyles.actionBtn}>
                 <MaterialIcons name="directions" size={18} color="#FFD93D" />
-                <Text style={styles.actionText}>Cómo llegar</Text>
+                <Text style={mapStyles.actionText}>Cómo llegar</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -173,3 +239,38 @@ export default function MapScreen() {
     </View>
   );
 }
+
+const lockedStyles = StyleSheet.create({
+  lockedOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.85)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+  },
+  lockedTitle: {
+    color: '#fff',
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginTop: 20,
+    textAlign: 'center',
+  },
+  lockedSubtitle: {
+    color: '#ccc',
+    fontSize: 16,
+    marginVertical: 16,
+    textAlign: 'center',
+  },
+  upgradeButton: {
+    backgroundColor: '#FF6B6B',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 20,
+    marginTop: 10,
+  },
+  upgradeText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});

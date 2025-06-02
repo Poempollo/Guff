@@ -1,6 +1,11 @@
 # Changelog
 
-### [v0.8] - 2025-05-28 - Raul 
+### [v0.8.1] - 2025-06-02 - Raul 
+#### Added
+
+- Corregido pantallas de locked, ya que no volvía a la vista principal.
+
+### [v0.8] - 2025-06-02 - Raul 
 #### Added
 - Se ha implementado un método de suscripciones, el cual dependiendo de cual se elija, se pueda acceder o no a ciertos apartados.
 - La versión "Free" solo tiene acceso a Creación de mascotas, "Mercado" y a los ajustes de la aplicación.
