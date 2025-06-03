@@ -19,7 +19,7 @@ export const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({ email: '', password: '' });
 
-  const {setPets } = usePetContext();
+  const { setPets } = usePetContext();
 
   const handleEmailChange = (text: string) => {
     setEmail(text);

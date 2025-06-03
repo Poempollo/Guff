@@ -40,21 +40,13 @@ export const registerUser = async (email: string, username: string, password: st
             body: JSON.stringify({ email, username, password }),
         });
 
-        const text = await response.text();
-
-        let data;
-        try {
-            data = JSON.parse(text);
-        } catch {
-            console.error('Respuesta no JSON del servidor: ', text);
-            throw new Error('Error inesperado del servidor');
-        }
-
+        const data = await response.json();
+        
         if (!response.ok) {
             throw new Error(data.detail || 'Error al registrar usuario');
         }
 
-        await saveToken(data.token || data.access_token);
+        await saveToken(data.access_token);
         return data;
     } catch (error: any) {
         if (error instanceof TypeError) {

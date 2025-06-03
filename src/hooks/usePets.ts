@@ -2,16 +2,28 @@ import { useState, useEffect, useCallback } from 'react';
 import * as api from '../api/petApi';
 import { PetData } from '../api/petApi';
 import { Pet } from '../api/petApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const usePets = () => {
   const [pets, setPets] = useState<Pet[]>([]);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    api.getUserPets()
-      .then(setPets)
-      .catch(setError);
+    const loadPets = async () => {
+      try {
+        const token = await AsyncStorage.getItem('token');
+        if (!token) return;
+
+        const userPets = await api.getUserPets();
+        setPets(userPets);
+      } catch (err) {
+        setError(err as Error);
+      }
+    };
+
+    loadPets();
   }, []);
+
 
   const addPet = useCallback(async (petData: PetData) => {
     try {
@@ -31,5 +43,15 @@ export const usePets = () => {
     }
   }, []);
 
-  return { pets, addPet, deletePet, error };
+  const refreshPets = useCallback(async () => {
+    try {
+      const updatedPets = await api.getUserPets();
+      setPets(updatedPets);
+    } catch (e) {
+      setError(e as Error);
+    }
+  }, []);
+
+
+  return { pets, addPet, deletePet, refreshPets, error };
 };

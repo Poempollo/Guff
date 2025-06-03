@@ -13,8 +13,7 @@ import styles from "../../styles/PetStyles";
 import { usePets } from "../../hooks/usePets";
 import { PetData } from "../../api/petApi";
 import { SelectModal } from "../SelectModal";
-import { getUserPets } from "../../api/petApi";
-import { usePetContext } from "../../context/PetContext";
+import { Alert } from "react-native";
 
 const speciesOptions = ["Perro", "Gato", "Conejo"];
 const breedOptions: Record<string, string[]> = {
@@ -29,7 +28,7 @@ interface AddPetModalProps {
 }
 
 export const AddPetModal: React.FC<AddPetModalProps> = ({ visible, onClose }) => {
-  const { addPet } = usePets();
+  const { addPet, refreshPets } = usePets();
   const [form, setForm] = useState<Omit<PetData, 'vaccinations' | 'next_vaccines' | 'distance_walked_km'>>({
     name: "",
     species: "",
@@ -43,8 +42,6 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({ visible, onClose }) =>
   const [showBreedModal, setShowBreedModal] = useState(false);
   const [showGenderModal, setShowGenderModal] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-
-  const { setPets } = usePetContext();
 
   const handleInput = (field: keyof typeof form, value: string) => {
     setForm(prev => ({ ...prev, [field]: value }));
@@ -90,10 +87,10 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({ visible, onClose }) =>
         distance_walked_km: 0,
       };
       await addPet(data);
-
       // Cargamos las mascotas del usuario, para que aparezcan al guardar.
-      const pets = await getUserPets();
-      setPets(pets);
+      await refreshPets();
+
+      Alert.alert(`Prueba a recargar la página tirando de arriba para ver a ${form.name}!`)
 
       onClose();
       setForm({ name: "", species: "", breed: "", gender: "", birth_date: "", photo_url: "" });

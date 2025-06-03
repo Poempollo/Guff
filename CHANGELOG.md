@@ -1,39 +1,54 @@
 # Changelog
 
-### [v0.8.3] - 2025-06-03 - Raul 
+### [v0.9.3] - 2025-06-03 - Raul 
 #### Added
-
 - Se ha corregido y mejorado la precisión con la que busca "Clinicas Veterinarias" y "Parques para perros".
 - Ahora busca por ubicación del usuario y lo muestra.
 
-### [v0.8.2] - 2025-06-02 - Raul 
+### [v0.9.2] - 2025-06-02 - Raul 
 #### Added
-
 - Se ha cambiado imagenes de los planes por unas mucho mas atractivas.
 - Se ha ajustado el tamaño de la pantalla para que quede ajustada al dispositivo y se vean 
   los componentes de forma correcta.
 - Se ha ordenado todos los estilos en sus carpetas correspondientes para mejor rendimiento y manejo
   de errores.
 
-### [v0.8.1] - 2025-06-02 - Raul 
+### [v0.9.1] - 2025-06-02 - Raul 
 #### Added
-
 - Corregido pantallas de locked, ya que no volvía a la vista principal.
 
-### [v0.8] - 2025-06-02 - Raul 
+### [v0.9] - 2025-06-02 - Raul 
 #### Added
 - Se ha implementado un método de suscripciones, el cual dependiendo de cual se elija, se pueda acceder o no a ciertos apartados.
 - La versión "Free" solo tiene acceso a Creación de mascotas, "Mercado" y a los ajustes de la aplicación.
 - La versión "Intermedia" tiene acceso a lo anteorior más "ChatBot".
 - La versión "Premium" tiene accesoa a todo.
 
-### [v0.7] - 2025-05-28 - Raul 
+### [v0.8] - 2025-05-28 - Raul 
 #### Added
 - Se ha añadido nueva ventana y botón "Map".
 - Se ha puesto los estilos y el const Place en archivos separados para mejor rendimiento y reutilización.
 - Se ha modificado los colores del mapa acorde al estilo realizado hasta ahora.
 - 
 ## Major Update
+### [v0.7.4] - 2025-05-30 - Javier 
+#### Fixed
+- Ahora las mascotas se eliminan antes de borrar al usuario, funcionando correctamente.
+
+### [v0.7.3] - 2025-05-28 - Javier 
+#### Added
+- Añadido un pullrefresh en petsScreen, que se encarga de reactualizar las mascotas, tras borrar o añadir alguna.
+
+### [v0.7.2] - 2025-05-28 - Javier 
+#### Fixed
+- Movida la funcionalidad de PetContext a usePets, más limpio y fácil de mantener.
+- Agregado un método para actualizar correctamente las mascotas al borrar o crear alguna. RefreshPets.
+
+### [v0.7.1] - 2025-05-28 - Javier 
+#### Fixed
+- Arreglado el registro para que maneje los token correctamente y no de fallos.
+
+## Minor Update
 ### [v0.7] - 2025-05-27 - Javier y Raul
 #### Added
 - Añadida la vista de mercado completa y funcional.

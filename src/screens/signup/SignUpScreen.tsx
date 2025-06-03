@@ -15,7 +15,7 @@ import {
   validateUsername,
   validatePassword,
 } from "../../utils/useFormValidation";
-import { registerUser } from "../../api/authApi";
+import { registerUser, saveToken } from "../../api/authApi";
 import { Keyboard, TouchableWithoutFeedback } from "react-native";
 import { ActivityIndicator } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -87,7 +87,7 @@ const SignUpScreen = () => {
 
     try {
       const data = await registerUser(email, username, password);
-      await AsyncStorage.setItem('token', data.token);
+      await saveToken(data.access_token);
       navigation.reset({
         index: 0,
         routes: [
