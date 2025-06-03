@@ -1,5 +1,11 @@
 # Changelog
 
+### [v0.8.3] - 2025-06-03 - Raul 
+#### Added
+
+- Se ha corregido y mejorado la precisión con la que busca "Clinicas Veterinarias" y "Parques para perros".
+- Ahora busca por ubicación del usuario y lo muestra.
+
 ### [v0.8.2] - 2025-06-02 - Raul 
 #### Added
 
