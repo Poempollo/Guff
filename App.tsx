@@ -1,58 +1,79 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+
 import LoginScreen from "./src/screens/login/LoginScreen";
-import BottomTabsNavigator from "./src/navigation/BottomTabsNavigator";
 import SignUpScreen from "./src/screens/signup/SignUpScreen";
 import ForgotPasswordScreen from "./src/screens/forgot/ForgotPasswordScreen";
+import PlansScreen from "./src/screens/Plans/PlansScreen";
+import BottomTabsNavigator from "./src/navigation/BottomTabsNavigator";
 import SplashScreen from "./src/components/splash/SplashScreen";
+
+import { AuthProvider, default as AuthContext } from "./src/context/AuthContext";
+import { PetProvider } from "./src/context/PetContext";
+
 import {
   Montserrat_500Medium,
   Montserrat_700Bold,
   useFonts,
 } from "@expo-google-fonts/montserrat";
-import { PetProvider } from "./src/context/PetContext";
 
 export type RootStackParamList = {
   Login: undefined;
   Main: undefined;
   SignUp: undefined;
   ForgotPassword: undefined;
+  Plans: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
-  /*const [isAppReady, setIsAppReady] = useState(false);
-  const [loaded] = useFonts({
+  return (
+    <SafeAreaProvider>
+      <AuthProvider>
+        <PetProvider>
+          <AppLoader />
+        </PetProvider>
+      </AuthProvider>
+    </SafeAreaProvider>
+  );
+}
+
+const AppLoader = () => {
+  const { loading: authLoading } = useContext(AuthContext);
+  const [appReady, setAppReady] = useState(false);
+
+  const [fontsLoaded] = useFonts({
     Montserrat_500Medium,
     Montserrat_700Bold,
   });
 
-  if (!loaded || !isAppReady) {
+  if (!fontsLoaded || authLoading || !appReady) {
     return (
       <SplashScreen
-        onFinish={(isCancelled) => !isCancelled && setIsAppReady(true)}
+        onFinish={(isCancelled: boolean) => {
+          if (!isCancelled) {
+            setAppReady(true);
+          }
+        }}
       />
     );
-  }*/
+  }
 
   return (
-    <SafeAreaProvider>
-      <PetProvider>
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="Login"
-            screenOptions={{ headerShown: false }}
-          >
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Main" component={BottomTabsNavigator} />
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </PetProvider>
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+        <Stack.Screen name="Plans" component={PlansScreen} />
+        <Stack.Screen name="Main" component={BottomTabsNavigator} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};

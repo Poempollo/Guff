@@ -73,37 +73,50 @@ export default function CheckoutModal({
   };
 
   const handlePayment = async () => {
-    // Validación básica
-    if (!formData.email || !formData.fullName || !formData.address) {
-      toast.error('Por favor, completa todos los campos requeridos');
-      return;
-    }
+  if (!formData.email || !formData.fullName || !formData.address) {
+    toast.error('Por favor, completa todos los campos requeridos');
+    return;
+  }
 
-    if (selectedPayment === 'card' && (!formData.cardNumber || !formData.expiryDate || !formData.cvv)) {
-      toast.error('Por favor, completa los datos de la tarjeta');
-      return;
-    }
+  if (selectedPayment === 'card' && (!formData.cardNumber || !formData.expiryDate || !formData.cvv)) {
+    toast.error('Por favor, completa los datos de la tarjeta');
+    return;
+  }
 
-    setIsProcessing(true);
+  setIsProcessing(true);
 
-    // Simular procesamiento de pago
-    setTimeout(() => {
-      setIsProcessing(false);
-     Alert.alert(
-  '¡Pago Exitoso!',
-  `Tu pedido ha sido confirmado por €${totalPrice.toFixed(2)}`,
-  [
-    {
-      text: 'OK',
-      onPress: () => {
-        onPaymentComplete();
-      },
-    },
-  ]
-);
-      onPaymentComplete();
-    }, 3000);
-  };
+  setTimeout(() => {
+    setIsProcessing(false);
+    Alert.alert(
+      '¡Pago Exitoso!',
+      `Tu pedido ha sido confirmado por €${totalPrice.toFixed(2)}`,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            onPaymentComplete();
+
+            // Limpiar formulario
+            setFormData({
+              email: '',
+              fullName: '',
+              address: '',
+              city: '',
+              zipCode: '',
+              cardNumber: '',
+              expiryDate: '',
+              cvv: '',
+            });
+
+            //Restablecer método de pago
+            setSelectedPayment('card');
+          },
+        },
+      ]
+    );
+  }, 3000);
+};
+
 
   const formatCardNumber = (value: string) => {
     // Remover espacios y caracteres no numéricos

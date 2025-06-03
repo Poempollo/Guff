@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import { usePets } from "../../hooks/usePets";
+import { Vaccine, Medication } from "../../api/petApi";
+import styles from "../../styles/HomeScreenStyles";
 import { SafeAreaView, ScrollView, View, Text, TouchableOpacity, RefreshControl} from "react-native";
 import { PetCarousel } from "../../components/Pets/Carousel/PetCarousel";
 import { AddPetModal } from "../../components/Pets/AddPetModal";
 import { VaccineBanner } from "../../components/Pets/Vaccine/VaccineBanner";
 import { MedicationList } from "../../components/Pets/Medication/MedicationList";
-import { usePets } from "../../hooks/usePets";
-import { Vaccine, Medication } from "../../api/petApi";
-import styles from "../../styles/HomeScreenStyles";
+import UpgradePlanButton from "../../components/Plans/UpgradePlanButton";
 
 const PetsScreen: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -73,6 +74,9 @@ const PetsScreen: React.FC = () => {
             <MedicationList medications={medications} />
           </>
         )}
+
+      
+        <UpgradePlanButton />
       </ScrollView>
     </SafeAreaView>
   );
