@@ -19,14 +19,6 @@ export interface PetData {
     photo_url?: string;
 };
 
-export interface Vaccine {
-
-}
-
-export interface Medication {
-
-}
-
 export const createPet = async (petData: PetData) => {
     const token = await getToken();
     if (!token) throw new Error('Usuario no autenticado');

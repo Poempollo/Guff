@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.10.1] - 2025-06-05 - Javier 
+#### Added
+- Añadida la clase reminderApi.ts con funcionalidad para manejar la api desde el front con los recordatorios.
+
 ### [v0.9.3] - 2025-06-03 - Raul 
 #### Added
 - Se ha corregido y mejorado la precisión con la que busca "Clinicas Veterinarias" y "Parques para perros".
