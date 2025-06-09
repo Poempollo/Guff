@@ -2,6 +2,10 @@
 
 ### [v0.10] - 2025-06-09 - Javier 
 #### Added
+- Añadidos estilos a los recordatorios!.
+
+### [v0.10] - 2025-06-09 - Javier 
+#### Added
 - Toda la funcionalidad de los recordatorios añadida.
 
 ### [v0.9.3] - 2025-06-03 - Raul 
