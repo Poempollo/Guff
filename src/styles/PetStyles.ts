@@ -85,6 +85,34 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
   },
+  reminderItem: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  reminderTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    color: '#333',
+  },
+  reminderDescription: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 8,
+  },
+  reminderInfo: {
+    fontSize: 13,
+    color: '#888',
+  },
 });
 
 export default styles;

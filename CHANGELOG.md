@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.10] - 2025-06-09 - Javier 
+#### Added
+- Toda la funcionalidad de los recordatorios añadida.
+
 ### [v0.9.3] - 2025-06-03 - Raul 
 #### Added
 - Se ha corregido y mejorado la precisión con la que busca "Clinicas Veterinarias" y "Parques para perros".
