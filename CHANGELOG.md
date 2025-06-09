@@ -1,6 +1,11 @@
 # Changelog
 
-### [v0.10] - 2025-06-09 - Javier 
+## Prerelease version
+### [v0.11] - 2025-06-09 - Javier 
+#### Finally
+- Estilos y correciones de formato en la app, versión alfa avanzada.
+
+### [v0.10.1] - 2025-06-09 - Javier 
 #### Added
 - Añadidos estilos a los recordatorios!.
 

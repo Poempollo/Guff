@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { usePets } from "../../hooks/usePets";
-// import { Vaccine, Medication } from "../../api/petApi"; // Posiblemente estas ya no sean necesarias
 import styles from "../../styles/HomeScreenStyles";
-// import petStyles from "../../styles/PetStyles"; // Ya no necesitamos esto si usamos los estilos de HomeScreenStyles directamente
 import {
   SafeAreaView,
   ScrollView,
@@ -13,8 +11,6 @@ import {
 } from "react-native";
 import { PetCarousel } from "../../components/Pets/Carousel/PetCarousel";
 import { AddPetModal } from "../../components/Pets/AddPetModal";
-// import { VaccineBanner } from "../../components/Pets/Vaccine/VaccineBanner";
-// import { MedicationList } from "../../components/Pets/Medication/MedicationList";
 import UpgradePlanButton from "../../components/Plans/UpgradePlanButton";
 
 import { AddReminderModal, Reminder } from "../../components/Pets/AddReminderModal";
