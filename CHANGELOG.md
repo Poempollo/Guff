@@ -1,5 +1,9 @@
 # Changelog
 
+### [v0.11.1] - 2025-06-10 - Javier 
+#### Fixed
+- Arreglados los estilos del PetScreen.tsx para mostrar el titulo.
+
 ## Prerelease version
 ### [v0.11] - 2025-06-09 - Javier 
 #### Finally
